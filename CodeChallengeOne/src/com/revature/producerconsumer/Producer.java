@@ -1,30 +1,47 @@
 package com.revature.producerconsumer;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class Producer<T> {
+public class Producer implements Runnable {
 	
-	List<T> list = new ArrayList<>();
+	List<Object> basket;
 	
-	synchronized public void produce(){
-
-		Random r = new Random();
-		
-		int ranVar = r.nextInt(50) + 1;
-		
-		while(list.size() < ranVar)
-			list.add((T) new Object());
-		
-		System.out.println("Produced; new Size: " + list.size());
-
+	public Producer(List<Object> basket) {
+		this.basket = basket;
 	}
 	
-	public<T> List<T> returnList(){
-		return (List<T>) list;
+	void pushToBasket(Object o) {
+		basket.add(o);
 	}
 	
+	@Override
+	public void run() {
+			try {
+				this.produce();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}		
 	
+	public void produce() throws InterruptedException {
 
+		while(true) {
+			
+			System.out.println("Producer");
+			
+			synchronized (this)
+            {
+			
+	           wait(); // wait here instead of looping like a jerk
+			
+			this.pushToBasket(new Object());
+			
+			System.out.println("Produced; new Size: " + basket.size());
+			
+			notify();
+			
+			Thread.sleep(5000);
+            }
+        }
+	}		
 }

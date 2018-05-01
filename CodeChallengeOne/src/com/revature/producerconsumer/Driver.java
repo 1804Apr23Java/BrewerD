@@ -1,13 +1,16 @@
 package com.revature.producerconsumer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Driver {
-	
+
 	public static void main(String args[]) {
 
-		MyThread T1 = new MyThread();
+		List<Object> basket = new ArrayList<Object>();
 		
-		T1.start();
-		Consumer c = new Consumer();
-		c.start();
+		new Thread(new Producer(basket)).start();
+		new Thread(new Consumer(basket)).start();
+		
 	}
 }

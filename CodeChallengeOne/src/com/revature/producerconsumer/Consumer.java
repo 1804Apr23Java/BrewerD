@@ -1,28 +1,48 @@
 package com.revature.producerconsumer;
 import java.util.*;
 
-public class Consumer<T> extends Thread {
+public class Consumer implements Runnable {
 	
-	public void run(List<T> list) {
-		this.consume(list);
+	private List<Object> basket;
+	
+	public Consumer(List<Object> basket) {
+		this.basket = basket;
 	}
 	
-	synchronized public <T> List<T> consume(List<T> list) {
-		
-		Random r = new Random();
-		int numVars = 0;
-		numVars = list.size();
-		numVars = r.nextInt(numVars) + 1;
-		
-		while(true) {
-			numVars = r.nextInt(list.size());
-		for(int i = numVars; i > 0; i--)
-			list.remove(numVars);
-		
-			System.out.println("Consumed; new Size: " + list.size());
-		
-			return list;
-		
+	void pullFromBasket(int index) {
+		basket.remove(index);
+	}
+	
+	public void run() {
+		try {
+			this.consume();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
-}
+	public void consume() throws InterruptedException {
+		
+		while(true) {
+			
+			System.out.println("Consumer");
+			
+			synchronized (this)
+            {
+				
+                wait();
+         
+			int numVars = (int) (Math.random() * basket.size());
+
+		for(int i = 1; i < numVars - 1; i++) {
+			this.pullFromBasket(i);
+			System.out.println("Consumed; new Size: " + basket.size());
+			
+		}
+			notify();
+			
+			Thread.sleep(5000);
+            }
+        } 
+	}
+}                  
