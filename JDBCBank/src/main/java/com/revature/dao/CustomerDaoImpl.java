@@ -236,8 +236,10 @@ public class CustomerDaoImpl implements CustomerDao {
 	public boolean insertCustomer(String username, String password) {
 		
 try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
-			
-			// using a Statement - beware SQL injection
+	
+	
+			BankAccountDao ba = new BankAccountDaoImpl();
+			CustomerDao ca = new CustomerDaoImpl();
 			String sql = "INSERT INTO CUSTOMER (CUSTOMER_PASSWORD, CUSTOMER_ADMIN, USERNAME) VALUES (?,?,?)";
 			
 			PreparedStatement statement = con.prepareStatement(sql);
@@ -246,8 +248,14 @@ try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			statement.setBoolean(2, false);
 			statement.setString(3, username);
 			statement.executeQuery();
-
 			con.close();
+			
+			ba.insertBankAccount("Checking", ca.getCustomerId(username, password));
+			ba.insertBankAccount("Savings", ca.getCustomerId(username, password));
+
+			
+			return true;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

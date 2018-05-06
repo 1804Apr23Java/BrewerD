@@ -6,7 +6,7 @@ import com.revature.domain.BankAccount;
 
 public interface BankAccountDao {
 	
-	public boolean insertBankAccount(String type);
+	public boolean insertBankAccount(String type, int customerId);
 	public boolean deleteBankAccount(int bankAccountId);
 	public boolean SuperUserDeleteBankAccount(int bankAccountId);
 	public boolean updateBankAccount(int bankAccountId, float difference);

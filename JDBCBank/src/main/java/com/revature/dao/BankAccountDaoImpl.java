@@ -17,17 +17,18 @@ import com.revature.util.ConnectionUtil;
 public class BankAccountDaoImpl implements BankAccountDao {
 	private String filename = "connection.properties";
 
-	public boolean insertBankAccount(String type) {
+	public boolean insertBankAccount(String type, int accountId) {
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 
 			// using a Statement - beware SQL injection
-			String sql = "INSERT INTO BANKACCOUNT (BALANCE, ACCOUNT_TYPE) VALUES (?,?)";
+			String sql = "INSERT INTO BANKACCOUNT (BALANCE, ACCOUNT_TYPE, CUSTOMER_ID) VALUES (?, ?,?)";
 
 			PreparedStatement statement = con.prepareStatement(sql);
 
 			statement.setFloat(1, 0);
 			statement.setString(2, type);
+			statement.setInt(3, accountId);
 			statement.executeQuery();
 
 			con.close();
