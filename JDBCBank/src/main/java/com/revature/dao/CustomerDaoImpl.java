@@ -167,15 +167,14 @@ public class CustomerDaoImpl implements CustomerDao {
 			}
 
 		con.close();
+		
+		return true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-	if (customerId != 0)
-		return true;
 		
 		return false;
 	}
@@ -223,13 +222,15 @@ public class CustomerDaoImpl implements CustomerDao {
 			pstmt.execute();
 			
 			con.close();
+			
+			return true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-			return true;
+			return false;
 	}
 
 	@Override
@@ -253,7 +254,6 @@ try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			ba.insertBankAccount("Checking", ca.getCustomerId(username, password));
 			ba.insertBankAccount("Savings", ca.getCustomerId(username, password));
 
-			
 			return true;
 			
 		} catch (SQLException e) {
