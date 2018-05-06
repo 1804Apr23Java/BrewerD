@@ -6,7 +6,7 @@ import com.revature.domain.Transaction;
 
 public interface TransactionDao {
 
-	public boolean insertTransaction(float difference);
+	public boolean insertTransaction(int bankAccountId, float difference);
 	public boolean deleteTransaction(int transactionId);
 	public boolean updateTransactionDifference(int transactionId, float newDifference);
 	public Transaction getTransactionById(int transactionId);

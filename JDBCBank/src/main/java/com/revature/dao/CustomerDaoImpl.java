@@ -27,16 +27,14 @@ public class CustomerDaoImpl implements CustomerDao {
 			Statement statement = con.createStatement();
 			ResultSet resultSet = statement.executeQuery(sql);
 			
-			System.out.println("Made connection");
 
 			// move through result set
 			while (resultSet.next()) {
-				System.out.println("In while loop");
 				int id = resultSet.getInt("CUSTOMER_ID");
 				String username = resultSet.getString("USERNAME");
 				String password = resultSet.getString("CUSTOMER_PASSWORD");
 				boolean admin = resultSet.getBoolean("CUSTOMER_ADMIN");
-				System.out.println(username);
+				//System.out.println(username);
 				customerList.add(new Customer(id, username, password, admin));
 			}
 			con.close();

@@ -16,15 +16,16 @@ public class TransactionDaoImpl implements TransactionDao {
 
 	private String filename = "connection.properties";
 
-	public boolean insertTransaction(float difference) {
+	public boolean insertTransaction(int bankAccountId, float difference) {
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 
 			// using a Statement - beware SQL injection
-			String sql = "INSERT INTO XACT (DIFFERENCE) VALUES (?)";
+			String sql = "INSERT INTO XACT (DIFFERENCE, BANKACCOUNT_NUM) VALUES (?, ?)";
 
 			PreparedStatement statement = con.prepareStatement(sql);
 
-			statement.setFloat(2, difference);
+			statement.setFloat(1, difference);
+			statement.setInt(2, bankAccountId);
 			statement.executeQuery();
 
 			con.close();

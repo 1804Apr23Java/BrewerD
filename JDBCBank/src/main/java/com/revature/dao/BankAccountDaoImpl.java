@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.domain.BankAccount;
+import com.revature.domain.Transaction;
 import com.revature.util.ConnectionUtil;
 
 public class BankAccountDaoImpl implements BankAccountDao {
@@ -140,6 +141,8 @@ public class BankAccountDaoImpl implements BankAccountDao {
             cs.setFloat(2, difference);
             cs.execute();
             con.close();
+            TransactionDao t = new TransactionDaoImpl();
+            t.insertTransaction(bankAccountId,  difference);
             return true;
 
         } catch (SQLException e) {
@@ -147,7 +150,6 @@ public class BankAccountDaoImpl implements BankAccountDao {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return false;
     }
 

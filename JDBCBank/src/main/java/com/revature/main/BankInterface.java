@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.revature.domain.BankAccount;
+import com.revature.domain.Customer;
 import com.revature.dao.BankAccountDao;
 import com.revature.dao.BankAccountDaoImpl;
 import com.revature.dao.CustomerDao;
@@ -77,11 +78,50 @@ public class BankInterface {
 					System.out.println();
 
 					if (cd.checkAdmin(cd.getCustomerId(user, pass))) {
-						System.out.println("Welcome back Mr. Bond. Select an option below: ");
-						System.out.println("nuke   - Destroy the world.");
-						System.out.println("cat    - Feed Mr. Bigglesworth.");
-						System.out.println("drop   - Drop all tables from the database.");
+						System.out.println("Welcome back Admin Select an option below: ");
+						System.out.println("users      - View all users.");
+						System.out.println("accounts   - View all bank accounts.");
+						System.out.println("logout     - Sign out of superuser account.");
+						
 						s = keyboard.next();
+						
+						if(s.equals("users")){
+							clearScreen();
+							
+							List<Customer> culist = cd.getCustomers();
+							
+									
+							for (Customer c : culist) {
+								System.out.println(c);
+							}
+
+							System.out.println("List of registered usernames above. There are " + culist.size() + " registered accounts. Enter any value to continue.");
+							
+							s = keyboard.next();
+							
+							continue logged;
+							
+							
+						} else if(s.equals("accounts")) {
+							
+							clearScreen();
+							List<BankAccount> balist = bad.getBankAccounts();
+							for (BankAccount b : balist) {
+								System.out.println(b);
+							}
+							
+							System.out.println("List of bank accounts above. There are " + balist.size() + " bank accounts. Enter any value to continue.");
+
+							s = keyboard.next();
+							
+							continue logged;
+							
+						} else if(s.equals("logout")) {
+							clearScreen();
+							loggedIn = false;
+							break;
+						}
+						
 						loggedIn = false;
 
 					} else {
@@ -118,11 +158,11 @@ public class BankInterface {
 									System.out.println("Sorry, there are not enough funds for that withdrawal.");
 									continue logged;
 								}
-								if (bad.updateBankAccount(accountChoice, -val))
-									;
+								if (bad.updateBankAccount(accountChoice, -val)) {	
 								clearScreen();
 								System.out.println("$" + val + " has been successfully withdrawn from your account.");
 								continue logged;
+								}
 							} else {
 								clearScreen();
 								System.out.println("Returning...");
