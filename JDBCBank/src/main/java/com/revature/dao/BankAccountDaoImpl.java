@@ -1,6 +1,7 @@
 package com.revature.dao;
 
 import java.io.IOException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -93,7 +94,7 @@ public class BankAccountDaoImpl implements BankAccountDao {
 		return false;
 	}
 
-	public boolean updateBankAccount(int bankAccountId, float difference) {
+	/*public boolean updateBankAccount(int bankAccountId, float difference) {
 		PreparedStatement pstmt = null;
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
@@ -127,6 +128,28 @@ public class BankAccountDaoImpl implements BankAccountDao {
 
 		return false;
 	}
+	*/
+	public boolean updateBankAccount(int bankAccountId, float difference) {
+        
+		CallableStatement cs = null;
+        
+        try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+            String sql = "{call PROC_CHANGE_BALANCE(?, ?)}";
+            cs = con.prepareCall(sql);
+            cs.setInt(1, bankAccountId);
+            cs.setFloat(2, difference);
+            cs.execute();
+            con.close();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 
 	public List<BankAccount> getBankAccounts() {
 		List<BankAccount> bankAccountList = new ArrayList<>();
@@ -230,6 +253,68 @@ public class BankAccountDaoImpl implements BankAccountDao {
 			if (resultSet.next()) {
 				int balance = resultSet.getInt("BALANCE");
 				return balance;
+			}
+
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return 0;
+	}
+
+	@Override
+	public List<BankAccount> getBankAccountsByUserAccount(int customerId) {
+		
+		PreparedStatement pstmt = null;
+		
+		List<BankAccount> al = new ArrayList<>();
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+
+			String sql = "SELECT * FROM BANKACCOUNT WHERE CUSTOMER_ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, customerId);
+			ResultSet rs = pstmt.executeQuery();
+			
+			// move through result set
+			while (rs.next()) {
+				int accountId = rs.getInt("BANKACCOUNT_NUM");
+				float balance = rs.getFloat("BALANCE");
+				String type  = rs.getString("ACCOUNT_TYPE");
+				int custId = rs.getInt("CUSTOMER_ID");
+				al.add(new BankAccount(accountId, balance, type, custId));
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return al;
+	}
+
+	@Override
+	public int getBankAccountOwner(int accountId) {
+		
+		PreparedStatement pstmt = null;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+
+			// use a prepared statement
+			String sql = "SELECT CUSTOMER_ID FROM BANKACCOUNT WHERE BANKACCOUNT_NUM = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, accountId);
+			ResultSet resultSet = pstmt.executeQuery();
+
+			// do something with result
+			if (resultSet.next()) {
+				int custId = resultSet.getInt("CUSTOMER_ID");
+				return custId;
 			}
 
 			con.close();

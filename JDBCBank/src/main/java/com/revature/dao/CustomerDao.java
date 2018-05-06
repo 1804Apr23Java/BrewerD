@@ -20,5 +20,5 @@ public interface CustomerDao {
 	public boolean checkAdmin(int customerId);
 
 	public int getCustomerId(String username, String password);
-	
+
 }

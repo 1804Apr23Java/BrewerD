@@ -11,7 +11,8 @@ public interface BankAccountDao {
 	public boolean SuperUserDeleteBankAccount(int bankAccountId);
 	public boolean updateBankAccount(int bankAccountId, float difference);
 	public List<BankAccount> getBankAccounts();
-	//public List<BankAccount> getBankAccountsByUserAccount(int accountId);
+	public List<BankAccount> getBankAccountsByUserAccount(int accountId);
 	public BankAccount getBankAccountById(int bankAccountId);
 	public float getBankAccountBalance(int bankAccountId);
+	public int getBankAccountOwner(int accountId);
 }

@@ -1,34 +1,42 @@
 package com.revature.main;
 
+import java.util.List;
 import java.util.Scanner;
 
+import com.revature.domain.BankAccount;
+import com.revature.dao.BankAccountDao;
+import com.revature.dao.BankAccountDaoImpl;
 import com.revature.dao.CustomerDao;
 import com.revature.dao.CustomerDaoImpl;
+import com.revature.dao.TransactionDao;
+import com.revature.dao.TransactionDaoImpl;
 
 public class BankInterface {
 
 	public static void main(String[] args) {
 
+		BankAccountDao bad = new BankAccountDaoImpl();
+		CustomerDao cd = new CustomerDaoImpl();
+		TransactionDao td = new TransactionDaoImpl();
+
 		String s = new String();
 		String pass = new String();
 		String user = new String();
 
-		CustomerDao cd = new CustomerDaoImpl();
 		start: while (running) {
 
 			clearScreen();
 			System.out.println(wMsg);
 			System.out.print(loginMsg);
-			s = keyboard.next();
-			user = s;
+			user = keyboard.next();
 
-			if (s.equals("exit")) { // If user inputs "exit", then quit
+			if (user.equals("exit")) { // If user inputs "exit", then quit
 				clearScreen();
 				System.out.println("Thank you for using JDBC Bank. Have a nice day.");
 				System.exit(0);
 			}
 
-			if (s.equals("new")) { // If user inputs "new" then create a new user
+			if (user.equals("new")) { // If user inputs "new" then create a new user
 				clearScreen();
 				System.out.print(newUserNamePrompt);
 				s = keyboard.next();
@@ -51,17 +59,22 @@ public class BankInterface {
 
 			clearScreen();
 			System.out.print(passwdPrompt);
-			s = keyboard.next();
-			pass = s;
+			pass = keyboard.next();
 
 			if (cd.checkCustomerPassword(user, pass)) { // CHECK FOR PASSWORD MATCH
+
+				clearScreen();
+				System.out.println("Login Successful. \n");
 
 				loggedIn = true;
 
 				logged: while (loggedIn) {
 
-					clearScreen();
-					System.out.println("Login Successful.");
+					List<BankAccount> bal = bad.getBankAccountsByUserAccount(cd.getCustomerId(user, pass));
+					for (BankAccount b : bal) {
+						System.out.println(b.toString());
+					}
+					System.out.println();
 
 					if (cd.checkAdmin(cd.getCustomerId(user, pass))) {
 						System.out.println("Welcome back Mr. Bond. Select an option below: ");
@@ -73,8 +86,6 @@ public class BankInterface {
 
 					} else {
 
-						System.out.println(cd.checkAdmin(cd.getCustomerId(user, pass)));
-
 						System.out.print(userMenu);
 						System.out.println(registeredUserMenu);
 						s = keyboard.next();
@@ -82,13 +93,87 @@ public class BankInterface {
 
 						if (s.equals("withdrawal")) {
 							System.out.println(withdrawalMenu);
+
+							for (BankAccount b : bal) {
+								System.out.println(b.toString());
+							}
+							System.out.print(selectAccount);
+
 							s = keyboard.next();
-						} else if (s.equals("deposit")) {
+							Integer accountChoice = Integer.decode(s);
+
+							if (cd.getCustomerId(user, pass) == bad.getBankAccountOwner(accountChoice)) {
+								clearScreen();
+								System.out.println("That is a valid account choice.");
+								System.out.println("How much would you like to withdrawal?");
+								s = keyboard.next();
+								Float val = Float.parseFloat(s);
+								if (val < 0) {
+									clearScreen();
+									System.out.println("Sorry, user must input a positive value.");
+									continue logged;
+								}
+								if (val > bad.getBankAccountBalance(accountChoice)) {
+									clearScreen();
+									System.out.println("Sorry, there are not enough funds for that withdrawal.");
+									continue logged;
+								}
+								if (bad.updateBankAccount(accountChoice, -val))
+									;
+								clearScreen();
+								System.out.println("$" + val + " has been successfully withdrawn from your account.");
+								continue logged;
+							} else {
+								clearScreen();
+								System.out.println("Returning...");
+								continue logged;
+							}
+
+						} else if (s.equals("deposit")) { ////////////////////////////
+
 							System.out.println(depositMenu);
+
+							for (BankAccount b : bal) {
+								System.out.println(b.toString());
+							}
+							System.out.print(selectAccount);
+
 							s = keyboard.next();
-						} else if (s.equals("balance")) {
+							Integer accountChoice = Integer.decode(s);
+
+							if (cd.getCustomerId(user, pass) == bad.getBankAccountOwner(accountChoice)) {
+								clearScreen();
+								System.out.println("That is a valid account choice.");
+								System.out.println("How much would you like to deposit?");
+								s = keyboard.next();
+								Float val = Float.parseFloat(s);
+								if (val < 0) {
+									clearScreen();
+									System.out.println("Sorry, user must input a positive value.");
+									continue logged;
+								}
+
+								if (bad.updateBankAccount(accountChoice, val)) {
+									clearScreen();
+									System.out.println("$" + val + " successfully deposited to your account.");
+								}
+								continue logged;
+							}
+						} else if (s.equals("history")) {
 							System.out.println(viewAccounts);
+							for (BankAccount b : bal) {
+								System.out.println(b.toString());
+							}
+							System.out.println(selectAccount);
 							s = keyboard.next();
+							Integer accountChoice = Integer.decode(s);
+							if (cd.getCustomerId(user, pass) == bad.getBankAccountOwner(accountChoice)) {
+								clearScreen();
+								System.out.println(
+										"That is a valid account choice. Here is the transaction history for the account: ");
+								s = keyboard.next();
+							}
+
 						} else if (s.equals("logout")) {
 							// LOGOUT
 							loggedIn = false;
@@ -96,6 +181,7 @@ public class BankInterface {
 							// UNRECOGNIZED SELECTION
 							continue logged;
 						}
+
 					}
 				}
 			} else {
@@ -111,7 +197,6 @@ public class BankInterface {
 	private static void clearScreen() {
 		for (int i = 0; i < PAGE_SIZE; i++)
 			System.out.println();
-
 	}
 
 	public static String failedToLogin = new String("Sorry that username and password was not accepted.");
@@ -125,7 +210,7 @@ public class BankInterface {
 					+ "trans    - Access the transactions menu .\n");
 	public static String registeredUserMenu = new String(
 			"Type any command on the left side to access the corresponding menu."
-					+ "\nbalance    - View your accounts and their balances."
+					+ "\nhistory    - View your accounts and their history."
 					+ "\ndeposit    - Make a deposit to one of your accounts."
 					+ "\nwithdrawal - Withdraw money from an account"
 					+ "\nlogout     - Logout from the current session.");
@@ -133,6 +218,7 @@ public class BankInterface {
 	public static String newUserNamePrompt = new String("Please enter a new username: ");
 	public static String newPasswordPrompt = new String("Please enter a new password: ");
 	public static String viewAccounts = new String("Your account information is as follows: ");
+	public static String selectAccount = new String("Select an account number or type anything else to return: ");
 	public static String depositMenu = new String("Select an account for a deposit: ");
 	public static String withdrawalMenu = new String("Select an account for a withdrawal");
 
