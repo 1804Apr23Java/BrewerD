@@ -48,35 +48,32 @@ public class CustomerDaoImpl implements CustomerDao {
 
 		return customerList;
 	}
-
+	
 	@Override
-	public boolean insertCustomer(String username, String password) {
+	public boolean deleteCustomer(int customerId) {
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			
-			// using a Statement - beware SQL injection
-			String sql = "INSERT INTO CUSTOMER (CUSTOMER_PASSWORD, CUSTOMER_ADMIN, USERNAME) VALUES (?,?,?)";
+			
+			String sql = "DELETE FROM CUSTOMER WHERE CUSTOMER_ID = ?";
 			
 			PreparedStatement statement = con.prepareStatement(sql);
 			
-			statement.setString(1, password);
-			statement.setBoolean(2, false);
-			statement.setString(3, username);
+			statement.setInt(1, customerId);
 			statement.executeQuery();
 
 			con.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return false;
-	}
-	
-	@Override
-	public boolean deleteCustomer(int customerId) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		if(getCustomerById(customerId) == null) {
+			return true;
+		}
+			return false;
 	}
 
 	@Override
@@ -115,9 +112,38 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	public int getCustomerId() {
-		// TODO Auto-generated method stub
+	public int getCustomerId(String username, String password) {
+		
+		PreparedStatement pstmt = null;
+		int customerId;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+
+			// use a prepared statement
+			String sql = "SELECT CUSTOMER_ID FROM CUSTOMER WHERE USERNAME = ? AND CUSTOMER_PASSWORD = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, username);
+			pstmt.setString(2, password);
+			
+			ResultSet resultSet = pstmt.executeQuery();
+
+			// do something with result
+			if (resultSet.next()) {
+				customerId = resultSet.getInt("CUSTOMER_ID");
+				return customerId;
+			}
+
+		con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		return 0;
+		
+		
 	}
 
 	@Override
@@ -158,9 +184,77 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public boolean checkAdmin(int customerId) {
-		// TODO Auto-generated method stub
-		return false;
 		
-	
+		PreparedStatement pstmt = null;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+
+			// use a prepared statement
+			String sql = "SELECT CUSTOMER_ADMIN FROM CUSTOMER WHERE CUSTOMER_ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, customerId);
+			ResultSet resultSet = pstmt.executeQuery();
+			
+			if (resultSet.next()) {
+				boolean admin = resultSet.getBoolean("CUSTOMER_ADMIN");
+				return admin;
+			}
+
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+			return false;	
+	}
+
+	@Override
+	public boolean updateCustomerPassword(int customerId, String newPass) {
+		
+		PreparedStatement pstmt = null;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+
+			// use a prepared statement
+			String sql = "UPDATE CUSTOMER SET CUSTOMER_PASSWORD = ? WHERE CUSTOMER_ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(2, customerId);
+			pstmt.setString(1, newPass);
+			pstmt.execute();
+			
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+			return true;
+	}
+
+	@Override
+	public boolean insertCustomer(String username, String password) {
+		
+try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			
+			// using a Statement - beware SQL injection
+			String sql = "INSERT INTO CUSTOMER (CUSTOMER_PASSWORD, CUSTOMER_ADMIN, USERNAME) VALUES (?,?,?)";
+			
+			PreparedStatement statement = con.prepareStatement(sql);
+			
+			statement.setString(1, password);
+			statement.setBoolean(2, false);
+			statement.setString(3, username);
+			statement.executeQuery();
+
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

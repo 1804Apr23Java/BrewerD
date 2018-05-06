@@ -1,109 +1,109 @@
 package com.revature.main;
 
-import java.util.List;
 import java.util.Scanner;
 
 import com.revature.dao.CustomerDao;
 import com.revature.dao.CustomerDaoImpl;
-import com.revature.domain.Customer;
 
 public class BankInterface {
 
 	public static void main(String[] args) {
-		
-		CustomerDao cd = new CustomerDaoImpl();
-		
-		//cd.insertCustomer("daveboy", "lesssecurepassword");
-		
-		if(cd.checkCustomerPassword("daveboy", "lessecurepassword")) {
-			System.out.println("Customer found.");
-		} else {
-			System.out.println("Not found");
-		}
-		
-		
-		
-		
-		/*List<Customer> customers = cd.getCustomers();
-		
-		for (Customer c : customers) {
-			System.out.println(c.toString());
-			System.out.println("loopin");
-		}*/
-	}
-}	/*//Customer
-		BeehiveDao bd = new BeehiveDaoImpl();
-		List<Beehive> beehives = bd.getBeehives();
-		
-		for (Beehive b : beehives) {
-			System.out.println(b.toString());
-		}
-
 
 		String s = new String();
+		String pass = new String();
+		String user = new String();
 
+		CustomerDao cd = new CustomerDaoImpl();
 		start: while (running) {
 
 			clearScreen();
 			System.out.println(wMsg);
 			System.out.print(loginMsg);
 			s = keyboard.next();
-			s = s.toLowerCase();
+			user = s;
 
-			if (s.equals("exit"))
+			if (s.equals("exit")) { // If user inputs "exit", then quit
+				clearScreen();
+				System.out.println("Thank you for using JDBC Bank. Have a nice day.");
 				System.exit(0);
+			}
 
-			if (userFound) { // CHECK DB FOR USERNAME
+			if (s.equals("new")) { // If user inputs "new" then create a new user
 				clearScreen();
-				System.out.print(passwdPrompt);
+				System.out.print(newUserNamePrompt);
 				s = keyboard.next();
+				user = s;
+				System.out.print(newPasswordPrompt);
+				s = keyboard.next();
+				pass = s;
+				if (!cd.checkCustomerPassword(user, pass)) {
+					cd.insertCustomer(user, pass);
+					System.out.println("New user created. Press any key to continue.");
+					s = keyboard.next();
+					continue start;
 
-			} else {
-				clearScreen();
-				System.out.print(newUserPrompt);
-				s = keyboard.next();
-				s.toLowerCase();
-				if (s.equals("yes")) {
-					// MAKE A NEW USER
+				} else {
+					System.out.println("Sorry, that user already exists. Press any key to continue.");
+					s = keyboard.next();
 					continue start;
 				}
 			}
 
-			if (passwordMatches) { // CHECK FOR PASSWORD MATCH
+			clearScreen();
+			System.out.print(passwdPrompt);
+			s = keyboard.next();
+			pass = s;
+
+			if (cd.checkCustomerPassword(user, pass)) { // CHECK FOR PASSWORD MATCH
 
 				loggedIn = true;
+
 				logged: while (loggedIn) {
+
 					clearScreen();
-					System.out.print(userMenu);
-					System.out.println(registeredUserMenu);
-					s = keyboard.next();
-					s = s.toLowerCase();
+					System.out.println("Login Successful.");
 
-					if (s.equals("withdrawal")) {
-						System.out.println(withdrawalMenu);
+					if (cd.checkAdmin(cd.getCustomerId(user, pass))) {
+						System.out.println("Welcome back Mr. Bond. Select an option below: ");
+						System.out.println("nuke   - Destroy the world.");
+						System.out.println("cat    - Feed Mr. Bigglesworth.");
+						System.out.println("drop   - Drop all tables from the database.");
 						s = keyboard.next();
-					} else if (s.equals("deposit")) {
-						System.out.println(depositMenu);
-						s = keyboard.next();
-					} else if (s.equals("balance")) {
-						System.out.println(viewAccounts);
-						s = keyboard.next();
-					} else if (s.equals("logout")) {
-						// LOGOUT
 						loggedIn = false;
-					} else {
-						// UNRECOGNIZED SELECTION
-						continue logged;
-					}
 
+					} else {
+
+						System.out.println(cd.checkAdmin(cd.getCustomerId(user, pass)));
+
+						System.out.print(userMenu);
+						System.out.println(registeredUserMenu);
+						s = keyboard.next();
+						s = s.toLowerCase();
+
+						if (s.equals("withdrawal")) {
+							System.out.println(withdrawalMenu);
+							s = keyboard.next();
+						} else if (s.equals("deposit")) {
+							System.out.println(depositMenu);
+							s = keyboard.next();
+						} else if (s.equals("balance")) {
+							System.out.println(viewAccounts);
+							s = keyboard.next();
+						} else if (s.equals("logout")) {
+							// LOGOUT
+							loggedIn = false;
+						} else {
+							// UNRECOGNIZED SELECTION
+							continue logged;
+						}
+					}
 				}
 			} else {
 				System.out.println(failedToLogin);
-				continue start;
+				// continue start;
+				s = keyboard.next();
 			}
-
 		}
-		keyboard.close();
 	}
 
 	private static final int PAGE_SIZE = 100;
@@ -130,7 +130,8 @@ public class BankInterface {
 					+ "\nwithdrawal - Withdraw money from an account"
 					+ "\nlogout     - Logout from the current session.");
 	public static String passwdPrompt = new String("Please enter your password: ");
-	public static String newUserPrompt = new String("Would you like to create a new account? yes/no: ");
+	public static String newUserNamePrompt = new String("Please enter a new username: ");
+	public static String newPasswordPrompt = new String("Please enter a new password: ");
 	public static String viewAccounts = new String("Your account information is as follows: ");
 	public static String depositMenu = new String("Select an account for a deposit: ");
 	public static String withdrawalMenu = new String("Select an account for a withdrawal");
@@ -143,7 +144,6 @@ public class BankInterface {
 	static boolean passwordMatches = true;
 	int entry;
 
-	static String s;
+	// static String s = new String;
 	static Scanner keyboard = new Scanner(System.in);
 }
-*/
