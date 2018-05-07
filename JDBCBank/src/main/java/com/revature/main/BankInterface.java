@@ -1,10 +1,12 @@
 package com.revature.main;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import com.revature.domain.BankAccount;
 import com.revature.domain.Customer;
+import com.revature.domain.Transaction;
 import com.revature.dao.BankAccountDao;
 import com.revature.dao.BankAccountDaoImpl;
 import com.revature.dao.CustomerDao;
@@ -29,6 +31,7 @@ public class BankInterface {
 			clearScreen();
 			System.out.println(wMsg);
 			System.out.print(loginMsg);
+						
 			user = keyboard.next();
 
 			if (user.equals("exit")) { // If user inputs "exit", then quit
@@ -82,46 +85,46 @@ public class BankInterface {
 						System.out.println("users      - View all users.");
 						System.out.println("accounts   - View all bank accounts.");
 						System.out.println("logout     - Sign out of superuser account.");
-						
+
 						s = keyboard.next();
-						
-						if(s.equals("users")){
+
+						if (s.equals("users")) {
 							clearScreen();
-							
+
 							List<Customer> culist = cd.getCustomers();
-							
-									
+
 							for (Customer c : culist) {
 								System.out.println(c);
 							}
 
-							System.out.println("List of registered usernames above. There are " + culist.size() + " registered accounts. Enter any value to continue.");
-							
+							System.out.println("List of registered usernames above. There are " + culist.size()
+									+ " registered accounts. Enter any value to continue.");
+
 							s = keyboard.next();
-							
+
 							continue logged;
-							
-							
-						} else if(s.equals("accounts")) {
-							
+
+						} else if (s.equals("accounts")) {
+
 							clearScreen();
 							List<BankAccount> balist = bad.getBankAccounts();
 							for (BankAccount b : balist) {
 								System.out.println(b);
 							}
-							
-							System.out.println("List of bank accounts above. There are " + balist.size() + " bank accounts. Enter any value to continue.");
+
+							System.out.println("List of bank accounts above. There are " + balist.size()
+									+ " bank accounts. Enter any value to continue.");
 
 							s = keyboard.next();
-							
+
 							continue logged;
-							
-						} else if(s.equals("logout")) {
+
+						} else if (s.equals("logout")) {
 							clearScreen();
 							loggedIn = false;
 							break;
 						}
-						
+
 						loggedIn = false;
 
 					} else {
@@ -158,10 +161,11 @@ public class BankInterface {
 									System.out.println("Sorry, there are not enough funds for that withdrawal.");
 									continue logged;
 								}
-								if (bad.updateBankAccount(accountChoice, -val)) {	
-								clearScreen();
-								System.out.println("$" + val + " has been successfully withdrawn from your account.");
-								continue logged;
+								if (bad.updateBankAccount(accountChoice, -val)) {
+									clearScreen();
+									System.out
+											.println("$" + val + " has been successfully withdrawn from your account.");
+									continue logged;
 								}
 							} else {
 								clearScreen();
@@ -209,8 +213,16 @@ public class BankInterface {
 							Integer accountChoice = Integer.decode(s);
 							if (cd.getCustomerId(user, pass) == bad.getBankAccountOwner(accountChoice)) {
 								clearScreen();
-								System.out.println(
-										"That is a valid account choice. Here is the transaction history for the account: ");
+								System.out.println("That is a valid account choice. Here is the transaction history for the account: ");
+								
+								List<Transaction> tList = new ArrayList<>();
+								
+								tList = td.getAllTransactionsByAccount(accountChoice);
+								
+								for (Transaction t : tList) {
+									System.out.println(t);
+								}
+
 								s = keyboard.next();
 							}
 
@@ -240,7 +252,7 @@ public class BankInterface {
 	}
 
 	public static String failedToLogin = new String("Sorry that username and password was not accepted.");
-	public static String userMenu = new String("Welcome back! Please view your options below and make a selection. ");
+	public static String userMenu = new String("Please view your options below and make a selection. ");
 	public static String wMsg = new String("Welcome to JDBC Bank.");
 	public static String loginMsg = new String(
 			"Please enter your username, type 'new' to register an account, or 'exit' to exit: ");

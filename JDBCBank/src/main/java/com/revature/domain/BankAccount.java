@@ -20,13 +20,13 @@ public class BankAccount {
 		super();
 		this.accountNumber = accountNumber;
 		this.accountBalance = accountBalance;
-		this.accountNumber = accountNumber;
+		this.accountType = accountType;
 	}
 	public BankAccount(int accountNumber, float accountBalance, String accountType, int customerId) {
 		super();
 		this.accountNumber = accountNumber;
 		this.accountBalance = accountBalance;
-		this.accountNumber = accountNumber;
+		this.accountType = accountType;
 		this.customerId = customerId;
 	}
 	public int getAccountNumber() {
@@ -52,6 +52,6 @@ public class BankAccount {
 	}
 	@Override
 	public String toString() {
-		return "Account Number: " + accountNumber + " Current Balance: $" + accountBalance + " Account Type: " + accountType;
+		return "Account Number: " + accountNumber + " Current Balance: $" + accountBalance + " Account Type: " + accountType + " Customer ID: " + customerId;
 	}
 }

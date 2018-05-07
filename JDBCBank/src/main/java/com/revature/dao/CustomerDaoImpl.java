@@ -92,9 +92,9 @@ public class CustomerDaoImpl implements CustomerDao {
 			// do something with result
 			if (resultSet.next()) {
 				int customerId = resultSet.getInt("CUSTOMER_ID");
-				String username = resultSet.getString("USERNAME");
 				String password = resultSet.getString("CUSTOMER_PASSWORD");
-				boolean admin = resultSet.getBoolean("ADMIN");
+				boolean admin = resultSet.getBoolean("CUSTOMER_ADMIN");
+				String username = resultSet.getString("USERNAME");
 				c = new Customer(customerId, username, password, admin);
 			}
 
@@ -147,8 +147,6 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public boolean checkCustomerPassword(String username, String password) {
 		
-		int customerId = 0;
-		
 		PreparedStatement pstmt = null;
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
@@ -163,12 +161,16 @@ public class CustomerDaoImpl implements CustomerDao {
 
 			// do something with result
 			if (resultSet.next()) {
-				customerId = resultSet.getInt("CUSTOMER_ID");
+				int customerId = resultSet.getInt("CUSTOMER_ID");
+				if(customerId > 0)
+					return true;
 			}
 
+			
+			
 		con.close();
 		
-		return true;
+		return false;
 
 		} catch (SQLException e) {
 			e.printStackTrace();

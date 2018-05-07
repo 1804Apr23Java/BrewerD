@@ -159,7 +159,7 @@ public class BankAccountDaoImpl implements BankAccountDao {
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 
-			String sql = "SELECT * FROM BANKACCOUNT";
+			String sql = "SELECT * FROM BANKACCOUNT ORDER BY CUSTOMER_ID";
 			Statement statement = con.createStatement();
 			ResultSet resultSet = statement.executeQuery(sql);
 
@@ -168,7 +168,8 @@ public class BankAccountDaoImpl implements BankAccountDao {
 				int id = resultSet.getInt("BANKACCOUNT_NUM");
 				int balance = resultSet.getInt("BALANCE");
 				String accountType = resultSet.getString("ACCOUNT_TYPE");
-				bankAccountList.add(new BankAccount(id, balance, accountType));
+				int custId = resultSet.getInt("CUSTOMER_ID");
+				bankAccountList.add(new BankAccount(id, balance, accountType, custId));
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -327,7 +328,7 @@ public class BankAccountDaoImpl implements BankAccountDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		return 0;
 	}
 }

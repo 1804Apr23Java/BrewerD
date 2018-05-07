@@ -16,7 +16,6 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
 	private String filename = "connection.properties";
 
-
 	@Override
 	public List<Department> getDepartments() {
 
@@ -42,8 +41,6 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		}
 		return null;
 	}
-
-
 	@Override
 	public void getDeptAvgSalary() {
 		
@@ -55,9 +52,8 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		
 		for (Employee x : eList) {
 			System.out.println(x);
+			}
 		
 		return;
-		
-		}
 	}
 }
