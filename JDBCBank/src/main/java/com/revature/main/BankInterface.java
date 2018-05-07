@@ -31,7 +31,7 @@ public class BankInterface {
 			clearScreen();
 			System.out.println(wMsg);
 			System.out.print(loginMsg);
-						
+
 			user = keyboard.next();
 
 			if (user.equals("exit")) { // If user inputs "exit", then quit
@@ -122,22 +122,22 @@ public class BankInterface {
 						} else if (s.equals("delete")) {
 
 							clearScreen();
-							
+
 							List<Customer> clist = cd.getCustomers();
 
 							System.out.println("There are " + clist.size() + " users. Please enter a user to delete: ");
-							
+
 							s = keyboard.next();
 							Integer userSel = Integer.decode(s);
-							
+
 							cd.deleteCustomer(userSel);
-							
+
 							System.out.println("User #" + userSel + " has been deleted.");
-							
+
 							clist = cd.getCustomers();
-							
+
 							System.out.println("There are now " + clist.size() + " registered users.");
-							
+
 							s = keyboard.next();
 
 							continue logged;
@@ -236,12 +236,13 @@ public class BankInterface {
 							Integer accountChoice = Integer.decode(s);
 							if (cd.getCustomerId(user, pass) == bad.getBankAccountOwner(accountChoice)) {
 								clearScreen();
-								System.out.println("That is a valid account choice. Here is the transaction history for the account: ");
-								
+								System.out.println(
+										"That is a valid account choice. Here is the transaction history for the account: ");
+
 								List<Transaction> tList = new ArrayList<>();
-								
+
 								tList = td.getAllTransactionsByAccount(accountChoice);
-								
+
 								for (Transaction t : tList) {
 									System.out.println(t);
 								}
