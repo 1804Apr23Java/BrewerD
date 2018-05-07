@@ -84,6 +84,7 @@ public class BankInterface {
 						System.out.println("Welcome back Admin Select an option below: ");
 						System.out.println("users      - View all users.");
 						System.out.println("accounts   - View all bank accounts.");
+						System.out.println("delete     - Delete a user.");
 						System.out.println("logout     - Sign out of superuser account.");
 
 						s = keyboard.next();
@@ -115,6 +116,28 @@ public class BankInterface {
 							System.out.println("List of bank accounts above. There are " + balist.size()
 									+ " bank accounts. Enter any value to continue.");
 
+							s = keyboard.next();
+
+							continue logged;
+						} else if (s.equals("delete")) {
+
+							clearScreen();
+							
+							List<Customer> clist = cd.getCustomers();
+
+							System.out.println("There are " + clist.size() + " users. Please enter a user to delete: ");
+							
+							s = keyboard.next();
+							Integer userSel = Integer.decode(s);
+							
+							cd.deleteCustomer(userSel);
+							
+							System.out.println("User #" + userSel + " has been deleted.");
+							
+							clist = cd.getCustomers();
+							
+							System.out.println("There are now " + clist.size() + " registered users.");
+							
 							s = keyboard.next();
 
 							continue logged;
