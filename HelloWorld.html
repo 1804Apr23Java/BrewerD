@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+	<html>
+		<head>
+		<title>Hello World</title>
+		<meta charset="UTF-8">
+		
+		<style>
+				p { 
+					background-color : #FFFFFF;
+					margin:20px;
+					padding:30px;
+					border: 5pt;
+					
+				}
+		</style>
+			<link rel="stylesheet" href="mycoolstyles.css"/>
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
+		</head>
+		
+		<body>
+			<h1> This is a large heading</h1>
+			<h6> This is a small heading</h6>
+			
+			<div class="bobRoss">
+				<p>
+					 Some arbitrary paragraph or something.
+				</p>
+				
+				<p>
+					 Some other arbitrary paragraph.
+				</p>
+				
+			</div>
+			
+			<div class="bobRoss">
+				<h3> 1299 Panigale R </h3>
+				
+				<img id="1299PanigaleR" src="1299-panigaleR.jpg" alt="Amazing Bike" width="342" height "512" />
+			
+			</div>
+				
+			<div class="bobRoss">
+				<form class="mycoolform" method="GET" action="congrats.html"/>
+						some text: <input type="text" name="text1"/>
+						<br><br>
+						a color: <input type="color" name="color1"/>
+						<br><br>
+						a number <input type="number" name="number1"/>
+						<br><br>
+						a text area: <textarea name="text1" cols="30" rows="10"> Placeholder Text </textarea>
+						<br><br>
+					<select name="penguins">
+						<options value="emperor" selected>Emperor</option>
+						<options value="galapagos" selected>Galapagos</option>
+						<options value="macaroni" selected>Macaroni</option>
+					</select>
+					<br>
+					<br>
+					radio buttons: <br>
+					<input type="radio" name="penguinType" value="emperor" checked>Emperor</input><br>
+					<input type="radio" name="penguinType" value="galapagos" checked>Galapagos</input><br>
+					<input type="radio" name="penguinType" value="macaroni" checked>Macaroni</input><br>
+					
+					<!-- new from html5-->
+					<input list="browsers"/>
+						<datalist id="browsers">
+							<option value="chrome"/> 
+						
+						
+					<!--submits the form data to the handler-->
+					<!--if a form element does not have a name, it will not be submitted-->
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+			
+			<h1 class="bobRoss"> This is another large heading</h1>
+			
+		</body>
+		
+	</html>

@@ -1,0 +1,24 @@
+div {
+	background-color : #712af5;
+	
+}
+
+#Panigale {
+	display:block;
+	padding:40px;
+	margin:40px;
+	border-style:solid;
+	border-color:#67732a
+	border-width:10px;
+}
+
+.bobRoss {
+	background-image:url=("aprilia-rsv4-rf-rr-2015-carbon-oval-racing-exhaust-sc-project.html")
+}
+
+.form {
+	padding:40px;
+	margin:40px;
+	border-style:solid;
+	border-color:#67732a;
+}
