@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Books</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    
+</head>
+<body  background="images/bookstore-bground.jpg"></body>
+<h1><strong> Welcome to our bookstore! </strong></h1><br><br>
+<h3>Here are our current available books:</h3><br>
+    <div id="box" style="background-color:aqua; width:33%">
+
+    </div>
+
+    <h3>Insert a new Book below: </h3>
+    <br>
+    <form name="bookform" action="" method="POST">
+
+            Title:<br>
+            <input type="text" name="title" id="titl"><br>
+            Author:<br>
+            <input type="text" name="author" id="auth"><br>
+            Year Published:<br>
+            <input type="text" name="pDate" id="date"><br>
+            Cover Image:<br>
+            <input type="text" name="cover" id="cov"><br>
+          </form>
+
+          <button type=submit onclick="submitted();"/>
+                Submit Books
+            </button>
+
+          <script src="main.js"></script>
+</body>
+
+</html>
