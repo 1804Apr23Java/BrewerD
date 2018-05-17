@@ -1,0 +1,120 @@
+<!DOCTYPE hmtl>
+<html>
+
+<head>
+    <link href="resources/images/icon.ico" rel="icon" type="image/x-icon" />
+    <title>Cherry Coke</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="cherrycoke.html">Home
+                    <span class="sr-only">(current)</span>
+                </a>
+                <!--
+                            <a class="nav-item nav-link" href="#">Nutrition</a> -->
+                <a class="nav-item nav-link active" href="cherrycokehistory.html">History</a>
+                <!--<a class="nav-item nav-link disabled" href="#">Disabled</a>-->
+
+                <!--<a class="nav-item nav-link active" href="CherryCoke.html">home</a>-->
+                <a class="nav-item nav-link active" href="cherrynutrition.html">Nutrition</a>
+
+            </div>
+        </div>
+    </nav>
+</head>
+
+<body>
+    <!--<link href="images/icon.ico" rel="icon" type="image/x-icon" />-->
+    <h1 style="color:lightyellow">
+        <center>Welcome to the wonderful world of Coca-Cola Cherry</center>
+    </h1>
+    <style>
+        body {
+            background-color: #720D34;
+        }
+    </style>
+    <div class="cherryCoke2" style="color:gold">
+        <p>
+            Let's do that again. Just let go - and fall like a little waterfall. You better get your coat out, this is going to be a
+            cold painting. You're meant to have fun in life.
+        </p>
+        <p>
+            Maybe there's a happy little waterfall happening over here. See there how easy that is. These little son of a guns hide in
+            your brush and you just have to push them out. Talk to trees, look at the birds. Whatever it takes. You can't
+            have light without dark. You can't know happiness unless you've known sorrow. Be brave.
+        </p>
+    </div>
+
+    <div>
+        <h4 style="color:lightyellow">Here we have Cherry Coke:</h4>
+        <img id="cokeBottle" src="resources/images/bottle.jpg" alt="Text?" width="150" height="300" />
+        <a href="https://en.wikipedia.org/wiki/Coca-Cola_Cherry">find out more!!!!</a>
+    </div>
+
+    <div class="bobRoss">
+        <form class="myCoolForm" method="POST" action="cherrycokehistory.html" style="color:gold">
+            Cherry Coke:
+            <input type="text" name="text1" />
+            <br>
+            <br> a color:
+            <input type="color" name="color1" />
+            <br>
+            <br> a number:
+            <input type="number" name="num1" />
+            <br>
+            <br> a text area:
+            <textarea name="text1" cols="30" rows="10">your text here</textarea>
+            <br>
+            <br> a dropdown:
+            <br>
+            <select name="penguins">
+                <option value="emperor" selected>Cherry</option>
+                <option value="galapagos">Coke</option>
+                <option value="macaroni">A Cola</option>
+            </select>
+            <br>
+            <br> radio buttons:
+            <br>
+            <input type="radio" name="" value="emperor" checked>real</input>
+            <br>
+            <input type="radio" name="penguinType" value="galapagos">good</input>
+            <br>
+            <input type="radio" name="penguinType" value="macaroni">coke</input>
+            <br>
+            <br>
+            <!--Adding event listener that shoots a pop when submitted-->
+            <button id="myBtn">Click this to see a pop up</button>
+
+            <script>
+                document.getElementById("myBtn").addEventListener("click", myFunction);
+
+                function myFunction() {
+                    alert("Hello, thanks for testing, check out our history page");
+                }
+            </script>
+
+            <!--new from html5-->
+            <input list="browsers" />
+            <datalist id="browsers">
+                <option value="chrome" />
+                <option value="firefox" />
+                <option value="tor" />
+            </datalist>
+
+            <!--submits the form data to the handler-->
+            <!--if a form element does not have a name, it will not be submitted-->
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+
+</body>
+
+</html>

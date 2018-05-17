@@ -1,0 +1,28 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+	<servlet>
+		<servlet-name>EraServlet</servlet-name>
+		<display-name>EraServlet</display-name>
+		<description></description>
+		<servlet-class>cherryservlets.EraServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ResponseServlet</servlet-name>
+		<display-name>ResponseServlet</display-name>
+		<description></description>
+		<servlet-class>cherryservlets.ResponseServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EraServlet</servlet-name>
+		<url-pattern>/eraservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ResponseServlet</servlet-name>
+		<url-pattern>/responseservlet</url-pattern>
+	</servlet-mapping>
+  </web-app>
+
+  

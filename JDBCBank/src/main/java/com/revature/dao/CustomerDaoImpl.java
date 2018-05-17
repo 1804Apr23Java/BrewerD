@@ -140,8 +140,6 @@ public class CustomerDaoImpl implements CustomerDao {
 		}
 
 		return 0;
-		
-		
 	}
 
 	@Override
@@ -165,8 +163,6 @@ public class CustomerDaoImpl implements CustomerDao {
 				if(customerId > 0)
 					return true;
 			}
-
-			
 			
 		con.close();
 		
