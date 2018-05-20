@@ -15,7 +15,8 @@ import com.revature.base.Reimbursement;
 
 public class ReimbursementDaoImpl implements ReimbursementDao {
 
-	private String filename = "C:\\GitRepos\\BrewerD\\Project1\\connection.properties";
+	private String filename = "connection.properties";
+	
 	public static ReimbursementDao reim = new ReimbursementDaoImpl();
 
 	@Override
@@ -227,9 +228,11 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 			}
 
 			con.close();
-
+			
 			return rl;
 
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

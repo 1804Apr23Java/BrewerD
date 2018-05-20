@@ -73,7 +73,7 @@ public class LoginServlet extends HttpServlet {
 					return;
 
 
-				} else if (ed.loginEmployee(username, password)) {
+				} else {
 					System.out.println("Logging in as employee...");
 					session.setAttribute("username", username);
 					session.setAttribute("emp_id", emp.getEmp_id());

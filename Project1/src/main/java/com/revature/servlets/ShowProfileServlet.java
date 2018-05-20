@@ -49,10 +49,10 @@ public class ShowProfileServlet extends HttpServlet {
 
 			String empString = m.writeValueAsString(emp);
 
-			System.out.println(empString);
+			System.out.println("empString passed back: "+empString);
 
 			// String json = new Gson().toJson(someObject);
-			response.setContentType("application/json");
+			response.setContentType("html/text");
 			response.setCharacterEncoding("UTF-8");
 
 			response.getWriter().write(empString);
@@ -61,7 +61,7 @@ public class ShowProfileServlet extends HttpServlet {
 			// response.addHeader("eString", empString);
 			// response.getWriter
 			// request.getRequestDispatcher("profile").forward(request, response);
-			return;
+			//return;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

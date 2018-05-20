@@ -26,8 +26,8 @@ public class Employee {
 	}
 	@Override
 	public String toString() {
-		return "Employee [emp_id=" + emp_id + ", un=" + un + ", fn=" + fn + ", ln=" + ln + ", pw=" + pw + ", ism=" + ism
-				+ ", em=" + em + "]";
+		return "Employee " + emp_id + ":" + un + ":" + fn + ":" + ln + ":" + pw + ":" + ism
+				+ ":" + em;
 	}
 
 	public Employee(String un, String fn, String ln, String pw, int ism, String em) {

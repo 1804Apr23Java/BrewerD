@@ -10,6 +10,11 @@ public class Reimbursement {
 	public void setReim_id(int reim_id) {
 		this.reim_id = reim_id;
 	}
+	@Override
+	public String toString() {
+		return "Reimbursement " + reim_id + ":" + req + ":" + blob + ":" + status
+				+ ":" + man_id + ":" + emp_id + ":" + amt;
+	}
 	public String getReq() {
 		return req;
 	}
