@@ -17,5 +17,6 @@ public interface EmployeeDao {
 	public int getEmployeeId(Employee e) throws IOException, SQLException;
 	//public boolean deleteEmployee(Employee e) throws IOException, SQLException;
 	public boolean deleteEmployee(int id) throws IOException, SQLException;
-	
+	public boolean isEmployee(String un, String pw) throws IOException, SQLException;
+	public Employee getEmployee(String un) throws IOException, SQLException;
 }

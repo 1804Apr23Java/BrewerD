@@ -12,8 +12,8 @@ import com.revature.Util.ConnectionUtil;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 
-	private String filename = "connection.properties";
-	
+	private String filename = "connection.properties";// "C:\\GitRepos\\BrewerD\\Project1\\connection.properties";
+
 	public static EmployeeDao employee = new EmployeeDaoImpl();
 
 	public List<Employee> getEmployees() {
@@ -55,11 +55,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	public boolean isManagerEmployee(int emp_id) {
-try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 
-			
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+
 			String sql = "SELECT EMP_IS_M FROM EMP WHERE EMP_ID = ?";
-			int ism;
+			int ism = 5;
 
 			PreparedStatement statement = con.prepareStatement(sql);
 
@@ -68,15 +68,19 @@ try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			ResultSet resultSet = statement.executeQuery();
 
 			if (resultSet.next()) {
-				
+
 				ism = resultSet.getInt("EMP_IS_M");
-			
-				if(ism == 0) {
+
+				System.out.println("ism: " + ism);
+
+				if (ism == 0) {
 					return false;
 				} else if (ism == 1) {
 					return true;
 				}
 			}
+
+			System.out.println("ism: " + ism);
 
 			con.close();
 
@@ -91,11 +95,10 @@ try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 	}
 
 	public boolean isManagerEmployee(Employee emp) {
-try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 
-			
 			String sql = "SELECT EMP_IS_M FROM EMP WHERE EMP_ID = ?";
-			int ism;
+			int ism = 5;
 
 			PreparedStatement statement = con.prepareStatement(sql);
 
@@ -104,10 +107,12 @@ try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			ResultSet resultSet = statement.executeQuery();
 
 			if (resultSet.next()) {
-				
+
 				ism = resultSet.getInt("EMP_IS_M");
-			
-				if(ism == 0) {
+				System.out.println(emp.toString());
+				System.out.println("ism " + ism);
+
+				if (ism == 0) {
 					return false;
 				} else if (ism == 1) {
 					return true;
@@ -128,11 +133,10 @@ try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 	public Employee getEmployee(String un, String pw) {
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 
-			
 			String sql = "SELECT * FROM EMP WHERE EMP_UN = ? AND EMP_PW = ?";
 
 			Employee emp;
-			
+
 			int emp_id;
 			String username;
 			String fn;
@@ -149,7 +153,7 @@ try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			ResultSet resultSet = statement.executeQuery();
 
 			if (resultSet.next()) {
-				
+
 				emp_id = resultSet.getInt("EMP_ID");
 				username = resultSet.getString("EMP_UN");
 				fn = resultSet.getString("EMP_FN");
@@ -157,9 +161,9 @@ try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 				password = resultSet.getString("EMP_PW");
 				ism = resultSet.getInt("EMP_IS_M");
 				em = resultSet.getString("EMP_EM");
-			
+
 				emp = new Employee(emp_id, username, fn, ln, password, ism, em);
-				
+
 				return emp;
 			}
 
@@ -227,6 +231,107 @@ try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	@SuppressWarnings("unused")
+	@Override
+	public boolean isEmployee(String un, String pw) throws IOException, SQLException {
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+
+			String sql = "SELECT * FROM EMP WHERE EMP_UN = ? AND EMP_PW = ?";
+
+			Employee emp;
+
+			int emp_id;
+			String username;
+			String fn;
+			String ln;
+			String password;
+			int ism;
+			String em;
+
+			PreparedStatement statement = con.prepareStatement(sql);
+
+			statement.setString(1, un);
+			statement.setString(2, pw);
+
+			ResultSet resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+
+				emp_id = resultSet.getInt("EMP_ID");
+				username = resultSet.getString("EMP_UN");
+				fn = resultSet.getString("EMP_FN");
+				ln = resultSet.getString("EMP_LN");
+				password = resultSet.getString("EMP_PW");
+				ism = resultSet.getInt("EMP_IS_M");
+				em = resultSet.getString("EMP_EM");
+
+				emp = new Employee(emp_id, username, fn, ln, password, ism, em);
+
+				return true;
+			}
+
+			con.close();
+			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+	@Override
+	public Employee getEmployee(String un) throws IOException, SQLException {
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+
+			String sql = "SELECT * FROM EMP WHERE EMP_UN = ?";
+
+			Employee emp;
+
+			int emp_id;
+			String username;
+			String fn;
+			String ln;
+			String password;
+			int ism;
+			String em;
+
+			PreparedStatement statement = con.prepareStatement(sql);
+
+			statement.setString(1, un);
+
+			ResultSet resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+
+				emp_id = resultSet.getInt("EMP_ID");
+				username = resultSet.getString("EMP_UN");
+				fn = resultSet.getString("EMP_FN");
+				ln = resultSet.getString("EMP_LN");
+				password = resultSet.getString("EMP_PW");
+				ism = resultSet.getInt("EMP_IS_M");
+				em = resultSet.getString("EMP_EM");
+
+				emp = new Employee(emp_id, username, fn, ln, password, ism, em);
+
+				return emp;
+			}
+
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+
 	}
 
 }

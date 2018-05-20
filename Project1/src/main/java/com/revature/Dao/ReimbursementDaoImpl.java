@@ -15,7 +15,7 @@ import com.revature.base.Reimbursement;
 
 public class ReimbursementDaoImpl implements ReimbursementDao {
 
-	private String filename = "connection.properties";
+	private String filename = "C:\\GitRepos\\BrewerD\\Project1\\connection.properties";
 	public static ReimbursementDao reim = new ReimbursementDaoImpl();
 
 	@Override
