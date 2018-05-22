@@ -121,10 +121,10 @@
 			<div class="card">
 				<div class="card-header">
 					<a class="card-link" data-toggle="collapse"
-						data-parent="#accordion" href="#collapseOne"> Update Personal
+						data-parent="#accordion" href="#collapseZero"> Update Personal
 						Information </a>
 				</div>
-				<div id="collapseOne" class="collapse">
+				<div id="collapseZero" class="collapse">
 					<div class="card-body">
 						<form class="box" action="UpdateEmpServlet" method="post">
 							<fieldset>
@@ -169,12 +169,12 @@
 	
 	<div id="showReimList">
 	
-	  <div id="accordion">
+	  <div id="accordion2">
 
         <div class="card">
             <div class="card-header">
-                <a class="card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                    Pending Reimbursement Requests
+                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                    Display Pending Reimbursements
                 </a>
             </div>
             <div id="collapseOne" class="collapse">
@@ -182,15 +182,12 @@
                     <table id="PendingList" class="table">
                         <tr>
                             <th>ID</th>
-                            <th>Amount</th>
                             <th>Description</th>
                             <th>Receipt</th>
-                            <th>Submitted Date</th>
-                            <th>Resolved Date</th>
-                            <th>Author</th>
-                            <th>Resolver</th>
-                            <th>Type</th>
                             <th>Status</th>
+                            <th>Manager ID</th>
+                            <th>Employee ID</th>
+                            <th>Amount</th>
                         </tr>
                     </table>
                 </div>
@@ -199,8 +196,8 @@
 
         <div class="card">
             <div class="card-header">
-                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                    Resolved Reimbursement Requests
+                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                    Display Resolved Reimbursements
                 </a>
             </div>
             <div id="collapseTwo" class="collapse">
@@ -208,15 +205,12 @@
                     <table id="ResolvedList" class="table">
                         <tr>
                             <th>ID</th>
-                            <th>Amount</th>
                             <th>Description</th>
                             <th>Receipt</th>
-                            <th>Submitted Date</th>
-                            <th>Resolved Date</th>
-                            <th>Author</th>
-                            <th>Resolver</th>
-                            <th>Type</th>
                             <th>Status</th>
+                            <th>Manager ID</th>
+                            <th>Employee ID</th>
+                            <th>Amount</th>
                         </tr>
                     </table>
                 </div>
@@ -225,8 +219,8 @@
 
         <div class="card">
             <div class="card-header">
-                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                    Approve/Deny Requests
+                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+                    Approve/Deny Reimbursements
                 </a>
             </div>
             <div id="collapseThree" class="collapse">
@@ -261,8 +255,8 @@
 
         <div class="card">
             <div class="card-header">
-                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                    View All Employee
+                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+                    Display Employees
                 </a>
             </div>
             <div id="collapseFour" class="collapse">
@@ -283,8 +277,8 @@
 
         <div class="card">
             <div class="card-header">
-                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-                    View All Requests from a single Employee
+                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion2" href="#collapseFive">
+                    Retrieve Requests By Employee
                 </a>
             </div>
             <div id="collapseFive" class="collapse">
@@ -297,7 +291,7 @@
                             <div class="mb-3">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="username1">Whats the employee username?</label>
+                                        <label for="username1">Enter Employee ID</label>
                                         <input id="workId" type="text" name="username1" class="form-control" onkeyup="allEmpReq()">
                                     </div>
                                 </div>

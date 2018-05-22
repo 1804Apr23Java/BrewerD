@@ -84,7 +84,7 @@
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>PReimServlet</servlet-name>
-  	<url-pattern>/reimbursements</url-pattern>
+  	<url-pattern>/PReimServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>ShowProfileServlet</servlet-name>

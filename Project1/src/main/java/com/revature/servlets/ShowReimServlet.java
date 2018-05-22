@@ -40,7 +40,7 @@ public class ShowReimServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("ShowReimServlet doGet");
+		//System.out.println("ShowReimServlet doGet");
 
 		HttpSession session = request.getSession(false);
 		

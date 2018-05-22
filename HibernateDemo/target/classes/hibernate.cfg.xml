@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.username">re</property>
+		<property name="hibernate.connection.password">re</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@revaturedb.cdwxgjcqrtpe.us-east-2.rds.amazonaws.com:1521:ORCL</property>
+		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+
+
+		<property name="hibernate.show_sql">true</property>
+	<!--  This can be useful during development but very noise in the console -->		
+	<!--  Choose whether to create db or update existing DDL -->
+	<!--  update by default -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+	<!--  Location of mappings -->
+		<mapping class="com.revature.beans.Flashcard"></mapping>
+		
+	</session-factory>
+</hibernate-configuration>

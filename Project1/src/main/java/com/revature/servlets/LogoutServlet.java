@@ -1,7 +1,7 @@
 package com.revature.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+//import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,19 +15,42 @@ public class LogoutServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = -6057117928413353392L;
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		System.out.println("LogoutServlet doPost");
+		request.getSession().invalidate();
+        response.sendRedirect(request.getContextPath() + "/login.html");
+	
+	}
 
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.setContentType("text/html");
-		PrintWriter pw = resp.getWriter();
-		req.getRequestDispatcher("base.html").include(req, resp);
-		HttpSession session = req.getSession(false);
+	/*
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		System.out.println("LogoutServlet doGet");
+
+        HttpSession session = request.getSession();
+        session.invalidate();
+        //response.setStatus(response.SC_MOVED_TEMPORARILY);
+      //  response.setHeader("Location", "login.html");
+        
+        response.sendRedirect("http://localhost:8083/Project1/login.html");
+		
+		/*
+		response.setContentType("text/html");
+		// PrintWriter pw = resp.getWriter();
+		request.getRequestDispatcher("login.html").include(request, response);
+		HttpSession session = request.getSession(false);
 		if (session != null) {
 			session.invalidate();
 		}
-		pw.println("you are successfully logged out");
-		pw.println("</div>");
-		pw.println("<a href=\"login.html\">Go back</a>");
-		pw.println("</body></html>");
-	}
-
+		response.sendRedirect("login.html");
+		return;
+		*/
+		// }
+	//}
+	
 }
+

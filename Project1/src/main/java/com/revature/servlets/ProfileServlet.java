@@ -21,11 +21,11 @@ public class ProfileServlet extends HttpServlet {
 		HttpSession session = req.getSession(false);
 		//check whether a Session exists
 		
-		System.out.println("In ProfileServlet doGet");
+		//System.out.println("In ProfileServlet doGet");
 		
 		if (session != null && session.getAttribute("username") != null) {
-			System.out.println("Current user: " + session.getAttribute("username"));
-			System.out.println("Employee Id: " + session.getAttribute("emp_id"));
+			//System.out.println("Current user: " + session.getAttribute("username"));
+			//System.out.println("Employee Id: " + session.getAttribute("emp_id"));
 			req.getRequestDispatcher("ShowProfileServlet").forward(req, resp);
 			return;
 		} else {

@@ -7,6 +7,7 @@ window.onload = function() {
 	document.getElementById("homeDiv").style.display = "block";
 	sendAjaxGet("http://localhost:8083/Project1/ShowProfileServlet", getEmpProfile);
 	sendAjaxGet("http://localhost:8083/Project1/ShowReimServlet", getAllReimbursements);
+	sendAjaxGet("http://localhost:8083/Project1/PReimServlet", getPendingReim);
 }
 
 $(document).on("click", "#profileButton", function() {
@@ -21,6 +22,12 @@ $(document).on("click", "#profileButton", function() {
 			$("<li>").text(item).appendTo($ul);
 		});
 	});
+});
+
+$("#logoutButton").click(function(){
+  $.ajax({ 
+    url: "LogoutServlet"
+  });
 });
 
 /* dont delete please
