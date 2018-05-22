@@ -38,7 +38,7 @@ public class ShowProfileServlet extends HttpServlet {
 
 		HttpSession session = request.getSession(false);
 
-		ObjectMapper m = new ObjectMapper();
+		//ObjectMapper m = new ObjectMapper();
 
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		EmployeeDao ed = new EmployeeDaoImpl();
@@ -47,15 +47,15 @@ public class ShowProfileServlet extends HttpServlet {
 		try {
 			emp = ed.getEmployee((String) session.getAttribute("username"));
 
-			String empString = m.writeValueAsString(emp);
+			//String empString = m.writeValueAsString(emp);
 
-			System.out.println("empString passed back: "+empString);
+			//System.out.println("empString passed back: "+empString);
 
 			// String json = new Gson().toJson(someObject);
 			response.setContentType("html/text");
 			response.setCharacterEncoding("UTF-8");
 
-			response.getWriter().write(empString);
+			response.getWriter().write(emp.toString());
 
 			// response.setContentType("application/json");
 			// response.addHeader("eString", empString);

@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="main.js"></script>
+
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
@@ -35,9 +35,21 @@
 			Reimbursements</button>
 		<button type="button" class="btn btn-secondary" id="subReimButton">Submit
 			Reimbursement</button>
+
+		
+			<button type="button" class="btn btn-secondary" id="employeeButton">Employees</button>
+
 		<button type="button" class="btn btn-secondary" id="logoutButton">Logout</button>
-		<div id="headerdiv"></div>
+
 	</div>
+
+	<div id="viewReimDiv">
+	
+	
+	
+	
+	</div>
+
 
 	<div id="subReimDiv">
 
@@ -64,6 +76,7 @@
 								<option value="2">Entertainment</option>
 								<option value="3">Food</option>
 								<option value="4">Supplies</option>
+								<option value="5">Other</option>
 							</select>
 						</div>
 					</div>
@@ -79,24 +92,29 @@
 
 	<div id="empProfileDiv">
 
-		<table id="myList" class="table">
-			<tr>
-				<th>ID</th>
-				<th>UserName</th>
-				<th>Password</th>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>Email</th>
-			</tr>
-			<tr>
-				<th id="Me1"></th>
-				<th id="Me2"></th>
-				<th id="Me3"></th>
-				<th id="Me4"></th>
-				<th id="Me5"></th>
-				<th id="Me6"></th>
-			</tr>
-		</table>
+		<div id="empHeader">
+
+			<table id="myList" class="table">
+				<tr>
+					<th>ID</th>
+					<th>Username</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Password</th>
+					<th>Is Manager</th>
+					<th>Email</th>
+				</tr>
+				<tr>
+					<th id="e1"></th>
+					<th id="e2"></th>
+					<th id="e3"></th>
+					<th id="e4"></th>
+					<th id="e5"></th>
+					<th id="e6"></th>
+					<th id="e7"></th>
+				</tr>
+			</table>
+		</div>
 
 		<div id="accordion">
 
@@ -116,15 +134,18 @@
 								<div class="mb-3">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="usr">Username: </label> <input id="usr1"
+											<label for="usr">Username: </label> <input id="un"
 												type="text" name="usr" class="form-control"> <label
-												for="psw">Password: </label> <input id="psw1" type="text"
-												name="psw" class="form-control"> <label for="fnm">First
-												Name: </label> <input id="fnm1" type="text" name="fnm"
-												class="form-control"> <label for="lnm">Last
-												Name: </label> <input id="lnm1" type="text" name="lnm"
-												class="form-control"> <label for="eml">Email:
-											</label> <input id="eml1" type="text" name="eml" class="form-control">
+												for="psw">Firstname: </label> <input id="pw" type="text"
+												name="psw" class="form-control"> <label for="fnm">Lastname:
+											</label> <input id="fn" type="text" name="fnm" class="form-control">
+
+
+											<label for="lnm">Password: </label> <input id="ln"
+												type="text" name="lnm" class="form-control"> <label
+												for="ism">Is Manager: </label> <input id="ism" type="text"
+												name="ism" class="form-control"> <label for="eml">Email:
+											</label> <input id="em" type="text" name="eml" class="form-control">
 
 										</div>
 									</div>
@@ -139,11 +160,168 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
 
+	<div id="homeDiv">
+		<h1>Welcome to the ERS!</h1>
+	</div>
+	
+	<div id="showReimList">
+	
+	  <div id="accordion">
 
-			<div id="somediv"></div>
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                    Pending Reimbursement Requests
+                </a>
+            </div>
+            <div id="collapseOne" class="collapse">
+                <div class="card-body">
+                    <table id="PendingList" class="table">
+                        <tr>
+                            <th>ID</th>
+                            <th>Amount</th>
+                            <th>Description</th>
+                            <th>Receipt</th>
+                            <th>Submitted Date</th>
+                            <th>Resolved Date</th>
+                            <th>Author</th>
+                            <th>Resolver</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-			<script src="scripts/ajax.js"></script>
-			<script src="scripts/myjs.js"></script>
+        <div class="card">
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                    Resolved Reimbursement Requests
+                </a>
+            </div>
+            <div id="collapseTwo" class="collapse">
+                <div class="card-body">
+                    <table id="ResolvedList" class="table">
+                        <tr>
+                            <th>ID</th>
+                            <th>Amount</th>
+                            <th>Description</th>
+                            <th>Receipt</th>
+                            <th>Submitted Date</th>
+                            <th>Resolved Date</th>
+                            <th>Author</th>
+                            <th>Resolver</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                    Approve/Deny Requests
+                </a>
+            </div>
+            <div id="collapseThree" class="collapse">
+                <div class="card-body">
+                    <form class="box" action="Resolve" method="post">
+                        <fieldset>
+                            <h2 class="section-heading mb-4">
+                                <span class="section-heading-upper">Resolve Reimbursement Requests</span>
+                            </h2>
+                            <div class="mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="reid">Whats the reimbursement account ID</label>
+                                        <input type="number" name="reid" class="form-control">
+                                        <label for="type">Categorize your reimbursement type:</label>
+                                        <select name="type" class="form-control">
+                                            <option value="2">Approve</option>
+                                            <option value="3">Deny</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <br>
+                        <div class="intro-button mx-auto">
+                            <input class="btn btn-primary btn-xl" type="submit" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                    View All Employee
+                </a>
+            </div>
+            <div id="collapseFour" class="collapse">
+                <div class="card-body">
+                    <table id="empList" class="table">
+                        <tr>
+                            <th>ID</th>
+                            <th>UserName</th>
+                            <th>Password</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                    View All Requests from a single Employee
+                </a>
+            </div>
+            <div id="collapseFive" class="collapse">
+                <div class="card-body">
+                    <form class="box">
+                        <fieldset>
+                            <h2 class="section-heading mb-4">
+                                <span class="section-heading-upper">Single Employee Requests </span>
+                            </h2>
+                            <div class="mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="username1">Whats the employee username?</label>
+                                        <input id="workId" type="text" name="username1" class="form-control" onkeyup="allEmpReq()">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </form>
+
+                    <table id="EmpReqList" class="table">
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+	
+	
+		<ul id="reimUl">
+		
+		</ul>
+	
+	</div>
+
+	<script src="scripts/ajax.js"></script>
+	<script src="scripts/myjs.js"></script>
 </body>
 </html>

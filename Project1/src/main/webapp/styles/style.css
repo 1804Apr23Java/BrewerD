@@ -14,3 +14,7 @@ h1 {
 #subReimDiv {
 	display: none;
 }
+
+#homeDiv {
+	display: block;
+}

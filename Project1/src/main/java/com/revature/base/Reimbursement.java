@@ -12,8 +12,8 @@ public class Reimbursement {
 	}
 	@Override
 	public String toString() {
-		return "Reimbursement " + reim_id + ":" + req + ":" + blob + ":" + status
-				+ ":" + man_id + ":" + emp_id + ":" + amt;
+		return "Reimbursement " + "Reim ID: " + reim_id + " Description: " + req + " Picture: " + blob + " Status: " + status
+				+ " Manager ID: " + man_id + " Emp ID: " + emp_id + " Amount: $" + amt + " ";
 	}
 	public String getReq() {
 		return req;

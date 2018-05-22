@@ -18,8 +18,8 @@ import com.revature.Dao.ReimbursementDaoImpl;
 import com.revature.base.Employee;
 import com.revature.base.Reimbursement;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+//import com.google.gson.Gson;
+//import com.google.gson.GsonBuilder;
 
 /**
  * Servlet implementation class ShowReimServlet
@@ -43,13 +43,14 @@ public class ShowReimServlet extends HttpServlet {
 		System.out.println("ShowReimServlet doGet");
 
 		HttpSession session = request.getSession(false);
+		
 		EmployeeDao ed = new EmployeeDaoImpl();
 		ReimbursementDao rd = new ReimbursementDaoImpl();
 		Employee emp;
 		List<Reimbursement> reimList;
 		
 		//Gson objGson = new GsonBuilder().setPrettyPrinting().create();
-		Gson objGson = new GsonBuilder().create();
+		//Gson objGson = new GsonBuilder().create();
 		
 		//ObjectMapper m = new ObjectMapper();
 		try {
@@ -58,7 +59,12 @@ public class ShowReimServlet extends HttpServlet {
 			
 			reimList = rd.getReimForEmp(emp);
 			
-			String json = objGson.toJson(reimList);
+			//String json = objGson.toJson(reimList);
+			
+			String strList = "";
+			
+			//Iterator<Reimbursement> iterator = reimList.iterator();
+
 			
 			if(reimList.size() == 0) {
 				System.out.println("Null Reimbursement List");
@@ -66,20 +72,17 @@ public class ShowReimServlet extends HttpServlet {
 				response.getWriter().write("No reimbursements.");
 				return;
 			}
-			//String reimString = "";
-			//List<Reimbursement> myObjects = m.readValue(reimString, m.getTypeFactory().constructCollectionType(List.class, Reimbursement.class));
-
-			//String reimString = m.writeValueAsString(reimList);
-
 			
 			
-			// String json = new Gson().toJson(someObject);
+			for(Reimbursement r : reimList) {
+				strList += r.toString();
+			}
 			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			//resp.getWriter().write("{\"bears\":"+bearString+"}");
-			System.out.println(json);
-			response.getWriter().write(json);
+			System.out.println(strList);
+			response.getWriter().write(strList);
 
 			return;
 		} catch (SQLException e) {
