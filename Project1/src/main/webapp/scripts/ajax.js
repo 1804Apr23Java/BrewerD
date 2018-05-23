@@ -54,13 +54,15 @@ function getAllReimbursements(xhr) {
 }
 
 function getPendingReim(xhr) {
+	
+	console.log("Grabbing Pending Requests...")
 
 	var Reims = xhr.responseText.split("Reimbursement");
 	for (var i = 1; i < Reims.length; i++) {
 		var splitReim = Reims[i].split(":");
 		var newrow = document.createElement("tr");
 		newrow.setAttribute("id", "Pending " + i);
-		document.getElementById("PendingList").appendChild(newrow);
+		document.getElementById("pendingList").appendChild(newrow);
 		var col1 = document.createElement("td");
 		var col2 = document.createElement("td");
 		var col3 = document.createElement("td");
@@ -96,3 +98,93 @@ function getPendingReim(xhr) {
 	
 	}
 }
+
+function getApprovedReim(xhr) {
+
+	var Reims = xhr.responseText.split("Reimbursement");
+	for (var i = 1; i < Reims.length; i++) {
+		var splitReim = Reims[i].split(":");
+		var newrow = document.createElement("tr");
+		newrow.setAttribute("id", "Approved " + i);
+		document.getElementById("approvedList").appendChild(newrow);
+		var col1 = document.createElement("td");
+		var col2 = document.createElement("td");
+		var col3 = document.createElement("td");
+		var col4 = document.createElement("td");
+		var col5 = document.createElement("td");
+		var col6 = document.createElement("td");
+		var col7 = document.createElement("td");
+		col1.textContent = splitReim[0];
+		col2.textContent = splitReim[1];
+
+		if (splitReim[2] == "null") {
+			col3.textContent = "None";
+		} else {
+			col3.textContent = "Submitted";
+		}
+		col4.textContent = splitReim[3];
+		col5.textContent = splitReim[4];
+		col6.textContent = splitReim[5];
+		col7.textContent = splitReim[6];
+
+		document.getElementById("Approved " + i).appendChild(col1);
+		document.getElementById("Approved " + i).appendChild(col2);
+		
+		if (splitReim[2] == "null") {
+			document.getElementById("Approved " + i).appendChild(col3);
+		} else {
+			document.getElementById("Approved " + i).appendChild(col3);
+		}
+		document.getElementById("Approved " + i).appendChild(col4);
+		document.getElementById("Approved " + i).appendChild(col5);
+		document.getElementById("Approved " + i).appendChild(col6);
+		document.getElementById("Approved " + i).appendChild(col7);
+	
+	}
+}
+
+function getDeniedReim(xhr) {
+
+	var Reims = xhr.responseText.split("Reimbursement");
+	for (var i = 1; i < Reims.length; i++) {
+		var splitReim = Reims[i].split(":");
+		var newrow = document.createElement("tr");
+		newrow.setAttribute("id", "Denied " + i);
+		document.getElementById("deniedList").appendChild(newrow);
+		var col1 = document.createElement("td");
+		var col2 = document.createElement("td");
+		var col3 = document.createElement("td");
+		var col4 = document.createElement("td");
+		var col5 = document.createElement("td");
+		var col6 = document.createElement("td");
+		var col7 = document.createElement("td");
+		col1.textContent = splitReim[0];
+		col2.textContent = splitReim[1];
+
+		if (splitReim[2] == "null") {
+			col3.textContent = "None";
+		} else {
+			col3.textContent = "Submitted";
+		}
+		col4.textContent = splitReim[3];
+		col5.textContent = splitReim[4];
+		col6.textContent = splitReim[5];
+		col7.textContent = splitReim[6];
+
+		document.getElementById("Denied " + i).appendChild(col1);
+		document.getElementById("Denied " + i).appendChild(col2);
+		
+		if (splitReim[2] == "null") {
+			document.getElementById("Denied " + i).appendChild(col3);
+		} else {
+			document.getElementById("Denied " + i).appendChild(col3);
+		}
+		document.getElementById("Denied " + i).appendChild(col4);
+		document.getElementById("Denied " + i).appendChild(col5);
+		document.getElementById("Denied " + i).appendChild(col6);
+		document.getElementById("Denied " + i).appendChild(col7);
+	
+	}
+}
+
+

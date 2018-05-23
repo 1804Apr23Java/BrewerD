@@ -8,6 +8,8 @@ window.onload = function() {
 	sendAjaxGet("http://localhost:8083/Project1/ShowProfileServlet", getEmpProfile);
 	sendAjaxGet("http://localhost:8083/Project1/ShowReimServlet", getAllReimbursements);
 	sendAjaxGet("http://localhost:8083/Project1/PReimServlet", getPendingReim);
+	sendAjaxGet("http://localhost:8083/Project1/AReimServlet", getApprovedReim);
+	sendAjaxGet("http://localhost:8083/Project1/DReimServlet", getDeniedReim);
 }
 
 $(document).on("click", "#profileButton", function() {

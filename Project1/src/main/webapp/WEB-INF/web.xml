@@ -58,6 +58,18 @@
   	<description></description>
   	<servlet-class>com.revature.servlets.ShowReimServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>AReimServlet</servlet-name>
+  	<display-name>AReimServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.revature.servlets.AReimServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>DReimServlet</servlet-name>
+  	<display-name>DReimServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.revature.servlets.DReimServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>MasterServlet</servlet-name>
   	<url-pattern>/MasterServlet</url-pattern>
@@ -93,5 +105,13 @@
   <servlet-mapping>
   	<servlet-name>ShowReimServlet</servlet-name>
   	<url-pattern>/ShowReimServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AReimServlet</servlet-name>
+  	<url-pattern>/AReimServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>DReimServlet</servlet-name>
+  	<url-pattern>/DReimServlet</url-pattern>
   </servlet-mapping>
 </web-app>

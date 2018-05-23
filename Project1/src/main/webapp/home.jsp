@@ -179,7 +179,7 @@
             </div>
             <div id="collapseOne" class="collapse">
                 <div class="card-body">
-                    <table id="PendingList" class="table">
+                    <table id="pendingList" class="table">
                         <tr>
                             <th>ID</th>
                             <th>Description</th>
@@ -197,12 +197,35 @@
         <div class="card">
             <div class="card-header">
                 <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                    Display Resolved Reimbursements
+                    Display Denied Reimbursements
                 </a>
             </div>
             <div id="collapseTwo" class="collapse">
                 <div class="card-body">
-                    <table id="ResolvedList" class="table">
+                    <table id="deniedList" class="table">
+                        <tr>
+                            <th>ID</th>
+                            <th>Description</th>
+                            <th>Receipt</th>
+                            <th>Status</th>
+                            <th>Manager ID</th>
+                            <th>Employee ID</th>
+                            <th>Amount</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+                    Display Approved Reimbursements
+                </a>
+            </div>
+            <div id="collapseThree" class="collapse">
+                <div class="card-body">
+                    <table id="approvedList" class="table">
                         <tr>
                             <th>ID</th>
                             <th>Description</th>
@@ -219,11 +242,11 @@
 
         <div class="card">
             <div class="card-header">
-                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
                     Approve/Deny Reimbursements
                 </a>
             </div>
-            <div id="collapseThree" class="collapse">
+            <div id="collapseFour" class="collapse">
                 <div class="card-body">
                     <form class="box" action="Resolve" method="post">
                         <fieldset>
@@ -255,11 +278,11 @@
 
         <div class="card">
             <div class="card-header">
-                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion2" href="#collapseFive">
                     Display Employees
                 </a>
             </div>
-            <div id="collapseFour" class="collapse">
+            <div id="collapseFive" class="collapse">
                 <div class="card-body">
                     <table id="empList" class="table">
                         <tr>
@@ -277,11 +300,11 @@
 
         <div class="card">
             <div class="card-header">
-                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion2" href="#collapseFive">
+                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion2" href="#collapseSix">
                     Retrieve Requests By Employee
                 </a>
             </div>
-            <div id="collapseFive" class="collapse">
+            <div id="collapseSix" class="collapse">
                 <div class="card-body">
                     <form class="box">
                         <fieldset>
