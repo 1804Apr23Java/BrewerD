@@ -24,7 +24,7 @@ public class HomeServlet extends HttpServlet {
 		System.out.println("In HomeServlet doGet");
 		
 		if (session != null && session.getAttribute("username") != null) {
-			req.getRequestDispatcher("home.html").forward(req, resp);
+			req.getRequestDispatcher("home.jsp").forward(req, resp);
 		} else {
 			resp.sendRedirect("login");
 		}

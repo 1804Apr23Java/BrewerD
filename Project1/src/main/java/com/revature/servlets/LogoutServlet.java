@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 //import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 public class LogoutServlet extends HttpServlet {
 
@@ -19,8 +20,11 @@ public class LogoutServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("LogoutServlet doPost");
-		request.getSession().invalidate();
-        response.sendRedirect(request.getContextPath() + "/login.html");
+		
+		HttpSession session = request.getSession();
+		//String user = (String) session.getAttribute("username");
+		session.invalidate();
+		response.sendRedirect("login.html");
 	
 	}
 

@@ -34,34 +34,21 @@ public class ShowProfileServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//System.out.println("ShowProfileServlet doGet");
-
+		System.out.println("ShowProfileServlet doGet");
+		
 		HttpSession session = request.getSession(false);
 
-		//ObjectMapper m = new ObjectMapper();
-
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		EmployeeDao ed = new EmployeeDaoImpl();
 		Employee emp;
 
 		try {
 			emp = ed.getEmployee((String) session.getAttribute("username"));
 
-			//String empString = m.writeValueAsString(emp);
-
-			//System.out.println("empString passed back: "+empString);
-
-			// String json = new Gson().toJson(someObject);
 			response.setContentType("html/text");
 			response.setCharacterEncoding("UTF-8");
 
 			response.getWriter().write(emp.toString());
 
-			// response.setContentType("application/json");
-			// response.addHeader("eString", empString);
-			// response.getWriter
-			// request.getRequestDispatcher("profile").forward(request, response);
-			//return;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,13 +62,17 @@ public class ShowProfileServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		
+		//USELESS//
+		
+		
+		
 		System.out.println("ShowProfileServlet doPost");
 
 		HttpSession session = request.getSession(false);
 
 		ObjectMapper m = new ObjectMapper();
 
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		EmployeeDao ed = new EmployeeDaoImpl();
 		Employee emp;
 
@@ -90,18 +81,11 @@ public class ShowProfileServlet extends HttpServlet {
 
 			String empString = m.writeValueAsString(emp);
 
-			System.out.println(empString);
-
-			// String json = new Gson().toJson(someObject);
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 
 			response.getWriter().write(empString);
 
-			// response.setContentType("application/json");
-			// response.addHeader("eString", empString);
-			// response.getWriter
-			// request.getRequestDispatcher("profile").forward(request, response);
 			return;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

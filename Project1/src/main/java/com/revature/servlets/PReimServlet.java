@@ -8,13 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.revature.Dao.EmployeeDao;
-import com.revature.Dao.EmployeeDaoImpl;
+
 import com.revature.Dao.ReimbursementDao;
 import com.revature.Dao.ReimbursementDaoImpl;
-import com.revature.base.Employee;
 import com.revature.base.Reimbursement;
 
 /**
@@ -38,16 +35,12 @@ public class PReimServlet extends HttpServlet {
 		
 		System.out.println("PENDING SERVLET doGet");
 
-		HttpSession session = request.getSession(false);
+		//HttpSession session = request.getSession(false);
 		
-		//EmployeeDao ed = new EmployeeDaoImpl();
 		ReimbursementDao rd = new ReimbursementDaoImpl();
-		//Employee emp;
 		List<Reimbursement> reimList;
 		
 		try {
-			
-			//emp = ed.getEmployee((String) session.getAttribute("username"));
 			
 			reimList = rd.getPendingReimbursements();
 			
@@ -67,7 +60,6 @@ public class PReimServlet extends HttpServlet {
 			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
-			System.out.println(strList);
 			response.getWriter().write(strList);
 			return;
 			
@@ -83,11 +75,9 @@ public class PReimServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("PENDING SERVLET doPost");
-		HttpSession session = request.getSession(false);
-		
-		//EmployeeDao ed = new EmployeeDaoImpl();
+		//HttpSession session = request.getSession(false);
+	
 		ReimbursementDao rd = new ReimbursementDaoImpl();
-		//Employee emp;
 		List<Reimbursement> reimList;
 		
 		try {
@@ -112,7 +102,6 @@ public class PReimServlet extends HttpServlet {
 			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
-			System.out.println(strList);
 			response.getWriter().write(strList);
 			return;
 			

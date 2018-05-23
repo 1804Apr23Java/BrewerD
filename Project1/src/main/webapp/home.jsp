@@ -35,12 +35,11 @@
 			Reimbursements</button>
 		<button type="button" class="btn btn-secondary" id="subReimButton">Submit
 			Reimbursement</button>
-
 		
 			<button type="button" class="btn btn-secondary" id="employeeButton">Employees</button>
-
-		<button type="button" class="btn btn-secondary" id="logoutButton">Logout</button>
-
+		<form class="box" action="LogoutServlet" method="post">
+		<input class="btn btn-primary btn-xl" type="submit" value="Logout" style="margin-left:10px">
+            </form>
 	</div>
 
 	<div id="viewReimDiv">

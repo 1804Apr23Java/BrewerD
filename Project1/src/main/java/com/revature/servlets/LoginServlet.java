@@ -50,11 +50,8 @@ public class LoginServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		response.setContentType("text/html");
-
-		// PrintWriter pw = response.getWriter();
 		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-
+		String password = request.getParameter("password");  
 
 		try {
 
@@ -68,7 +65,7 @@ public class LoginServlet extends HttpServlet {
 					session.setAttribute("username", username);
 					session.setAttribute("emp_id",  emp.getEmp_id());
 					session.setAttribute("problem", null);
-					response.sendRedirect("home.jsp");
+					response.sendRedirect("home");
 					
 					return;
 
@@ -80,7 +77,7 @@ public class LoginServlet extends HttpServlet {
 					session.setAttribute("problem", null);
 					//response.sendRedirect("home.jsp");
 					//new jsp code below
-					response.sendRedirect("home.jsp");
+					response.sendRedirect("home");
 					return;
 				}
 			} else {
