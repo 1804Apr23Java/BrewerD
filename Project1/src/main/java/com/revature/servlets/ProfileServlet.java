@@ -19,8 +19,6 @@ public class ProfileServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
 		
-		System.out.println("ProfileServlet doGet");
-		
 		if (session != null && session.getAttribute("username") != null) {
 			//System.out.println("Current user: " + session.getAttribute("username"));
 			req.getRequestDispatcher("ShowProfileServlet").forward(req, resp);

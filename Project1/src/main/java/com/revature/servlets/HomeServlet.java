@@ -21,8 +21,6 @@ public class HomeServlet extends HttpServlet {
 		HttpSession session = req.getSession(false);
 		//check whether a Session exists
 		
-		System.out.println("In HomeServlet doGet");
-		
 		if (session != null && session.getAttribute("username") != null) {
 			req.getRequestDispatcher("home.jsp").forward(req, resp);
 		} else {

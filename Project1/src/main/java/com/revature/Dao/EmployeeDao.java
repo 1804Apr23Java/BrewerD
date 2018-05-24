@@ -8,7 +8,7 @@ import com.revature.base.Employee;
 
 public interface EmployeeDao {
 	
-	public List<Employee> getEmployees();
+	public List<Employee> getEmployees() throws IOException, SQLException;
 	public boolean insertEmployee(String un, String fn, String ln, String pw, int ism, String em) throws IOException, SQLException;
 	public boolean loginEmployee(String un, String pw) throws IOException, SQLException;
 	public boolean isManagerEmployee(int emp_id) throws IOException, SQLException;
@@ -19,4 +19,5 @@ public interface EmployeeDao {
 	public boolean deleteEmployee(int id) throws IOException, SQLException;
 	public boolean isEmployee(String un, String pw) throws IOException, SQLException;
 	public Employee getEmployee(String un) throws IOException, SQLException;
+	public boolean updateEmployee(String un, String fn, String ln, String pw, String em) throws IOException, SQLException;
 }

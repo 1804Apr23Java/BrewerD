@@ -70,6 +70,24 @@
   	<description></description>
   	<servlet-class>com.revature.servlets.DReimServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>UpdateEmpServlet</servlet-name>
+  	<display-name>UpdateEmpServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.revature.servlets.UpdateEmpServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ReimsForEmpServlet</servlet-name>
+  	<display-name>ReimsForEmpServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.revature.servlets.ReimsForEmpServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>GetEmployeesServlet</servlet-name>
+  	<display-name>GetEmployeesServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.revature.servlets.GetEmployeesServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>MasterServlet</servlet-name>
   	<url-pattern>/MasterServlet</url-pattern>
@@ -113,5 +131,17 @@
   <servlet-mapping>
   	<servlet-name>DReimServlet</servlet-name>
   	<url-pattern>/DReimServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>UpdateEmpServlet</servlet-name>
+  	<url-pattern>/UpdateEmpServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ReimsForEmpServlet</servlet-name>
+  	<url-pattern>/ReimsForEmpServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>GetEmployeesServlet</servlet-name>
+  	<url-pattern>/GetEmployeesServlet</url-pattern>
   </servlet-mapping>
 </web-app>

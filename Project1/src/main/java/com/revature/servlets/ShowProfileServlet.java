@@ -33,8 +33,6 @@ public class ShowProfileServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		System.out.println("ShowProfileServlet doGet");
 		
 		HttpSession session = request.getSession(false);
 
@@ -65,9 +63,6 @@ public class ShowProfileServlet extends HttpServlet {
 		
 		//USELESS//
 		
-		
-		
-		System.out.println("ShowProfileServlet doPost");
 
 		HttpSession session = request.getSession(false);
 

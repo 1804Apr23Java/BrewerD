@@ -32,8 +32,6 @@ public class PReimServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		System.out.println("PENDING SERVLET doGet");
 
 		//HttpSession session = request.getSession(false);
 		
@@ -73,8 +71,6 @@ public class PReimServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		System.out.println("PENDING SERVLET doPost");
 		//HttpSession session = request.getSession(false);
 	
 		ReimbursementDao rd = new ReimbursementDaoImpl();

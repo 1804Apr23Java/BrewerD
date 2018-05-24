@@ -188,3 +188,119 @@ function getDeniedReim(xhr) {
 }
 
 
+function getEmpReims(){
+	sendAjaxGet("http://localhost:8083/Project1/ReimsForEmpServlet", getEmpReims);
+}
+
+function getEmpReims(xhr){
+	var eachReq = xhr.responseText.split("Reimbursement");
+	var user = document.getElementById("empReimsId").value;
+	var myNode = document.getElementById("empReimTable");
+	while (myNode.firstChild) {
+	    myNode.removeChild(myNode.firstChild);
+	}
+	var newrow = document.createElement("tr");
+		newrow.setAttribute("id", "Req " + 0);
+		document.getElementById("empReimTable").appendChild(newrow);
+		var col1 = document.createElement("td");
+		var col2 = document.createElement("td");
+		var col3 = document.createElement("td");
+		var col4 = document.createElement("td");
+		var col5 = document.createElement("td");
+		var col6 = document.createElement("td");
+		var col7 = document.createElement("td");
+		var col8 = document.createElement("td");
+		var col9 = document.createElement("td");
+		var col10 = document.createElement("td");
+		col1.textContent = "ID";
+		col2.textContent = "Description";
+		col3.textContent = "Receipt";
+		col4.textContent = "Status";
+		col5.textContent = "Resolved By";
+		col6.textContent = "Employee ID";
+		col7.textContent = "Amount";
+		document.getElementById("Req " + 0).appendChild(col1);
+		document.getElementById("Req " + 0).appendChild(col2);
+		document.getElementById("Req " + 0).appendChild(col3);
+		document.getElementById("Req " + 0).appendChild(col4);
+		document.getElementById("Req " + 0).appendChild(col5);
+		document.getElementById("Req " + 0).appendChild(col6);
+		document.getElementById("Req " + 0).appendChild(col7);
+		
+	for (x = 1; x < eachReq.length ; x++){
+		var eachVal = eachReq[x].split(":");
+		if (eachVal[6] == user){
+		var newrow = document.createElement("tr");
+		newrow.setAttribute("id", "Req " + x);
+		document.getElementById("empReimTable").appendChild(newrow);
+		var col1 = document.createElement("td");
+		var col2 = document.createElement("td");
+		var col3 = document.createElement("td");
+		var col4 = document.createElement("td");
+		var col5 = document.createElement("td");
+		var col6 = document.createElement("td");
+		var col7 = document.createElement("td");
+		
+		col1.textContent = eachVal[0];
+		col2.textContent = eachVal[1];
+		
+		if (eachVal[2]== "null") {
+			col3.textContent = "No receipt";
+		} else {
+		var img = document.createElement("img");
+		img.src = "data:img/png;base64,"+ eachVal[2];
+		img.width = "200";
+		img.height = "300";
+		}
+		col4.textContent = eachVal[3];
+		col5.textContent = eachVal[4];
+		col6.textContent = eachVal[5];
+		col7.textContent = eachVal[6];
+		document.getElementById("Req " + x).appendChild(col1);
+		document.getElementById("Req " + x).appendChild(col2);
+		
+		if (eachVal[2] == "null"){
+			document.getElementById("Req " + x).appendChild(col3);			
+		} else {
+		document.getElementById("Req " + x).appendChild(img);
+		}
+		document.getElementById("Req " + x).appendChild(col4);
+		document.getElementById("Req " + x).appendChild(col5);
+		document.getElementById("Req " + x).appendChild(col6);
+		document.getElementById("Req " + x).appendChild(col7);
+		}
+	}
+}
+
+function getEmployees(xhr) {
+
+	var Emps = xhr.responseText.split("Employee");
+	for (var i = 1; i < Emps.length; i++) {
+		var splitEmp = Emps[i].split(":");
+		var newrow = document.createElement("tr");
+		newrow.setAttribute("id", "Employee " + i);
+		document.getElementById("employeeList").appendChild(newrow);
+		var col1 = document.createElement("td");
+		var col2 = document.createElement("td");
+		var col3 = document.createElement("td");
+		var col4 = document.createElement("td");
+		var col5 = document.createElement("td");
+		var col6 = document.createElement("td");
+		var col7 = document.createElement("td");
+		col1.textContent = splitEmp[0];
+		col2.textContent = splitEmp[1];
+		col3.textContent = splitEmp[2];
+		col4.textContent = splitEmp[3];
+		col5.textContent = splitEmp[4];
+		col6.textContent = splitEmp[5];
+		col7.textContent = splitEmp[6];
+		document.getElementById("Employee " + i).appendChild(col1);
+		document.getElementById("Employee " + i).appendChild(col2);
+		document.getElementById("Employee " + i).appendChild(col3);
+		document.getElementById("Employee " + i).appendChild(col4);
+		document.getElementById("Employee " + i).appendChild(col5);
+		document.getElementById("Employee " + i).appendChild(col6);
+		document.getElementById("Employee " + i).appendChild(col7);
+	
+	}
+}

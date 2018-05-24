@@ -5,10 +5,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
-import com.revature.base.Employee;
 import com.revature.Util.ConnectionUtil;
+import com.revature.base.Employee;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 
@@ -17,7 +18,52 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public static EmployeeDao employee = new EmployeeDaoImpl();
 
 	public List<Employee> getEmployees() {
-		// TODO Auto-generated method stub
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+
+			List<Employee> el = new LinkedList<Employee>();
+
+			Employee emp;
+
+			String sql = "SELECT * FROM EMP";
+
+			int emp_id;
+			String username;
+			String fn;
+			String ln;
+			String password;
+			int ism;
+			String em;
+
+			PreparedStatement statement = con.prepareStatement(sql);
+
+			ResultSet resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+
+				emp_id = resultSet.getInt("EMP_ID");
+				username = resultSet.getString("EMP_UN");
+				fn = resultSet.getString("EMP_FN");
+				ln = resultSet.getString("EMP_LN");
+				password = resultSet.getString("EMP_PW");
+				ism = resultSet.getInt("EMP_IS_M");
+				em = resultSet.getString("EMP_EM");
+
+				emp = new Employee(emp_id, username, fn, ln, password, ism, em);
+
+				el.add(emp);
+			}
+
+			con.close();
+
+			return el;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		return null;
 	}
 
@@ -71,17 +117,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 				ism = resultSet.getInt("EMP_IS_M");
 
-				System.out.println("ism: " + ism);
-
 				if (ism == 0) {
 					return false;
 				} else if (ism == 1) {
 					return true;
 				}
 			}
-
-			System.out.println("ism: " + ism);
-
 			con.close();
 
 		} catch (SQLException e) {
@@ -109,8 +150,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			if (resultSet.next()) {
 
 				ism = resultSet.getInt("EMP_IS_M");
-				System.out.println(emp.toString());
-				System.out.println("ism " + ism);
 
 				if (ism == 0) {
 					return false;
@@ -331,6 +370,39 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 
 		return null;
+
+	}
+
+	@Override
+	public boolean updateEmployee(String un, String fn, String ln, String pw, String em)
+			throws IOException, SQLException {
+
+		PreparedStatement pstmt = null;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+
+			// use a prepared statement
+			String sql = "UPDATE EMP SET EMP_FN = ?, EMP_LN = ?, EMP_PW = ?, EMP_EM = ? WHERE EMP_UN = ?";
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, fn);
+			pstmt.setString(2, ln);
+			pstmt.setString(3, pw);
+			pstmt.setString(4, em);
+			pstmt.setString(5, un);
+
+			pstmt.execute();
+
+			con.close();
+
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
 
 	}
 

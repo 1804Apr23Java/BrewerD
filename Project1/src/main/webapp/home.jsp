@@ -133,18 +133,18 @@
 								<div class="mb-3">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="usr">Username: </label> <input id="un"
-												type="text" name="usr" class="form-control"> <label
-												for="psw">Firstname: </label> <input id="pw" type="text"
-												name="psw" class="form-control"> <label for="fnm">Lastname:
-											</label> <input id="fn" type="text" name="fnm" class="form-control">
-
-
-											<label for="lnm">Password: </label> <input id="ln"
-												type="text" name="lnm" class="form-control"> <label
-												for="ism">Is Manager: </label> <input id="ism" type="text"
-												name="ism" class="form-control"> <label for="eml">Email:
-											</label> <input id="em" type="text" name="eml" class="form-control">
+											<label for="uname">Username: </label> 
+											<input id="un" type="text" name="unname" class="form-control"> 
+											<label for="pword">Firstname: </label> 
+											<input id="pw" type="text" name="fname" class="form-control"> 
+											<label for="fname">Lastname: </label> 
+											<input id="fn" type="text" name="lname" class="form-control">
+											<label for="lname">Password: </label> 
+											<input id="ln" type="text" name="pword" class="form-control"> 
+											<label for="isman">Is Manager: </label> 
+											<input id="ism" type="text" name="isman" class="form-control"> 
+											<label for="email">Email: </label> 
+											<input id="em" type="text" name="email" class="form-control">
 
 										</div>
 									</div>
@@ -256,7 +256,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="reid">Whats the reimbursement account ID</label>
-                                        <input type="number" name="reid" class="form-control">
+                                        <input type="number" name="reim_id" class="form-control">
                                         <label for="type">Categorize your reimbursement type:</label>
                                         <select name="type" class="form-control">
                                             <option value="2">Approve</option>
@@ -283,20 +283,20 @@
             </div>
             <div id="collapseFive" class="collapse">
                 <div class="card-body">
-                    <table id="empList" class="table">
+                    <table id="employeeList" class="table">
                         <tr>
                             <th>ID</th>
                             <th>UserName</th>
                             <th>Password</th>
                             <th>First Name</th>
                             <th>Last Name</th>
+                            <th>Is Manager</th>
                             <th>Email</th>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
-
         <div class="card">
             <div class="card-header">
                 <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion2" href="#collapseSix">
@@ -314,16 +314,17 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="username1">Enter Employee ID</label>
-                                        <input id="workId" type="text" name="username1" class="form-control" onkeyup="allEmpReq()">
+                                        <input id="empReimsId" type="number" name="emp_id" class="form-control" onkeyup="getEmpReims()">
                                     </div>
                                 </div>
                             </div>
                         </fieldset>
 
                     </form>
-
-                    <table id="EmpReqList" class="table">
+					<div id="empReimDiv">
+                    <table id="EmpReimTable" class="table">
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

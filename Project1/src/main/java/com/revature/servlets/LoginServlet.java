@@ -46,8 +46,6 @@ public class LoginServlet extends HttpServlet {
 		EmployeeDao ed = new EmployeeDaoImpl();
 		Employee emp;
 
-		System.out.println("LoginServlet doPost");
-
 		HttpSession session = request.getSession();
 		response.setContentType("text/html");
 		String username = request.getParameter("username");
