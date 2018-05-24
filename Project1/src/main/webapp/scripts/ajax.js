@@ -87,7 +87,7 @@ function getPendingReim(xhr) {
 		if (splitReim[2] == "null") {
 			col3.textContent = "None";
 		} else {
-			col3.innerHTML = splitReim[2];
+			col3.innerHTML = "Submitted";
 			col3.href = splitReim[2];
 		}
 		col4.textContent = splitReim[3];
@@ -252,11 +252,16 @@ function myReimsList(xhr) {
 	}
 }
 
+/*
 function getEmpReims() {
-	sendAjaxGet("http://localhost:8083/Project1/ReimsForEmpServlet",
-			getEmpReims);
+	sendAjaxGet("http://localhost:8083/Project1/ReimsForEmpServlet", getEmpReims);
 }
+*/
 
+function getReimsForEmp() {
+	console.log("GETREIMSFOREMP");
+	sendAjaxGet("http://localhost:8083/Project1/ReimsForEmpServlet", getEmpReims);
+}
 function getEmpReims(xhr) {
 	var eachReq = xhr.responseText.split("Reimbursement");
 	var user = document.getElementById("empReimsId").value;
@@ -274,9 +279,6 @@ function getEmpReims(xhr) {
 	var col5 = document.createElement("td");
 	var col6 = document.createElement("td");
 	var col7 = document.createElement("td");
-	var col8 = document.createElement("td");
-	var col9 = document.createElement("td");
-	var col10 = document.createElement("td");
 	col1.textContent = "ID";
 	col2.textContent = "Description";
 	col3.textContent = "Receipt";
@@ -293,14 +295,14 @@ function getEmpReims(xhr) {
 	document.getElementById("Req " + 0).appendChild(col7);
 
 	for (x = 1; x < eachReq.length; x++) {
-		var eachVal = eachReq[x].split(":");
+		var eachVal = eachReq[x].split("|");
 		if (eachVal[6] == user) {
 			var newrow = document.createElement("tr");
 			newrow.setAttribute("id", "Req " + x);
 			document.getElementById("empReimTable").appendChild(newrow);
 			var col1 = document.createElement("td");
 			var col2 = document.createElement("td");
-			var col3 = document.createElement("td");
+			var col3 = document.createElement("a");
 			var col4 = document.createElement("td");
 			var col5 = document.createElement("td");
 			var col6 = document.createElement("td");
@@ -309,13 +311,11 @@ function getEmpReims(xhr) {
 			col1.textContent = eachVal[0];
 			col2.textContent = eachVal[1];
 
-			if (eachVal[2] == "null") {
-				col3.textContent = "No receipt";
+			if (splitReim[2] == "null") {
+				col3.textContent = "None";
 			} else {
-				var img = document.createElement("img");
-				img.src = "data:img/png;base64," + eachVal[2];
-				img.width = "200";
-				img.height = "300";
+				col3.innerHTML = "Submitted";
+				col3.href = splitReim[2];
 			}
 			col4.textContent = eachVal[3];
 			col5.textContent = eachVal[4];
@@ -323,11 +323,11 @@ function getEmpReims(xhr) {
 			col7.textContent = eachVal[6];
 			document.getElementById("Req " + x).appendChild(col1);
 			document.getElementById("Req " + x).appendChild(col2);
-
-			if (eachVal[2] == "null") {
-				document.getElementById("Req " + x).appendChild(col3);
+			if (splitReim[2] == "null") {
+				col3.textContent = "None";
 			} else {
-				document.getElementById("Req " + x).appendChild(img);
+				col3.innerHTML = "Submitted";
+				col3.href = splitReim[2];
 			}
 			document.getElementById("Req " + x).appendChild(col4);
 			document.getElementById("Req " + x).appendChild(col5);

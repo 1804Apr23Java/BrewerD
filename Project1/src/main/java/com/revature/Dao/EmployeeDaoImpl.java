@@ -406,4 +406,54 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	}
 
+	@Override
+	public Employee getEmployeeById(int id) throws IOException, SQLException {
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+
+			String sql = "SELECT * FROM EMP WHERE EMP_ID = ?";
+
+			Employee emp;
+
+			int emp_id;
+			String username;
+			String fn;
+			String ln;
+			String password;
+			int ism;
+			String em;
+
+			PreparedStatement statement = con.prepareStatement(sql);
+
+			statement.setInt(1, id);
+
+			ResultSet resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+
+				emp_id = resultSet.getInt("EMP_ID");
+				username = resultSet.getString("EMP_UN");
+				fn = resultSet.getString("EMP_FN");
+				ln = resultSet.getString("EMP_LN");
+				password = resultSet.getString("EMP_PW");
+				ism = resultSet.getInt("EMP_IS_M");
+				em = resultSet.getString("EMP_EM");
+
+				emp = new Employee(emp_id, username, fn, ln, password, ism, em);
+
+				return emp;
+			}
+
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
+
 }

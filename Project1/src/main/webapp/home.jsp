@@ -292,12 +292,12 @@
         <div class="card">
             <div class="card-header">
                 <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion2" href="#collapseSix">
-                    Retrieve Requests By Employee
+                    Display Reimbursements For Employee
                 </a>
             </div>
             <div id="collapseSix" class="collapse">
                 <div class="card-body">
-                    <form class="box">
+                    <form class="box"> <!-- ="ReimsForEmpServlet"-->
                         <fieldset>
                             <h2 class="section-heading mb-4">
                                 <span class="section-heading-upper">Single Employee Requests </span>
@@ -306,7 +306,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="employee_Id">Enter Employee ID</label>
-                                        <input id="empReimsId" type="number" name="emp_id" class="form-control" onkeyup="getEmpReims()">
+                                        <input id="empReimsId" type="number" name="emp_id" class="form-control" onkeyup="getReimsForEmp()">
                                     </div>
                                 </div>
                             </div>
@@ -314,7 +314,7 @@
 
                     </form>
 					<div id="empReimDiv">
-                    <table id="EmpReimTable" class="table">
+                    <table id="empReimTable" class="table">
                     </table>
                     </div>
                 </div>
