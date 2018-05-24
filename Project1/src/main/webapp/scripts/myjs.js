@@ -5,11 +5,13 @@
 window.onload = function() {
 	clearBox();
 	document.getElementById("homeDiv").style.display = "block";
+	document.getElementById("accordion2").style.display = "none";
 	sendAjaxGet("http://localhost:8083/Project1/ShowProfileServlet", getEmpProfile);
-	sendAjaxGet("http://localhost:8083/Project1/ShowReimServlet", getAllReimbursements);
+	sendAjaxGet("http://localhost:8083/Project1/ShowReimServlet", myReimsList);
 	sendAjaxGet("http://localhost:8083/Project1/PReimServlet", getPendingReim);
 	sendAjaxGet("http://localhost:8083/Project1/AReimServlet", getApprovedReim);
 	sendAjaxGet("http://localhost:8083/Project1/DReimServlet", getDeniedReim);
+	sendAjaxGet("http://localhost:8083/Project1/GetEmployeesServlet", getEmployees);
 }
 
 $(document).on("click", "#profileButton", function() {
@@ -26,27 +28,9 @@ $(document).on("click", "#profileButton", function() {
 	});
 });
 
-$("#logoutButton").click(function(){
-  $.ajax({ 
-    url: "LogoutServlet"
-  });
-});
-
-/* dont delete please
- * 
-$(document).on("click", "#viewReimButton", function() {
-	clearBox();
-	$.get("ShowReimServlet", function(responseJson) {
-
-		var $ul = $("<ul>").appendTo($("#somediv"));
-		$.each(responseJson, function(index, item) {
-
-			$("<li>").text(item).appendTo($ul);
-
-		});
-	});
-});
-*/
+function logout(){
+	sendAjaxGet("http://localhost:8083/Project1/LogoutServlet", function(){});
+}
 
 $(document).on("click", "#subReimButton", function() {
 	clearBox();
@@ -79,30 +63,6 @@ function reimLister(reimStr){
     });
 };
 
-
-/*
-$(document).ready(function(){
-    $("button").click(function(){
-        $("ol").append("<li>list item <a href='javascript:void(0);' class='remove'>&times;</a></li>"); 
-    });
-    $(document).on("click", "a.remove" , function() {
-        $(this).parent().remove();
-    });
-});
-*/
-
-
-/*
-$(document).ready(function(){
-    $("button").click(function(){
-        $("ol").append("<li>list item <a href='javascript:void(0);' class='remove'>&times;</a></li>"); 
-    });
-    $(document).on("click", "a.remove" , function() {
-        $(this).parent().remove();
-    });
-});
-*/
-
 function clearBox() {
 	
 	document.getElementById("showReimList").style.display = "none";
@@ -111,5 +71,6 @@ function clearBox() {
 	document.getElementById("subReimDiv").style.display = "none";
 	document.getElementById("homeDiv").style.display = "none";
 	document.getElementById("empHeader").style.display="none"; // Hide the emp header
+
 
 }

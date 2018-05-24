@@ -40,6 +40,8 @@ public class ShowReimServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		System.out.println("ShowReimServlet doGet");
+		
 		HttpSession session = request.getSession(false);
 		
 		EmployeeDao ed = new EmployeeDaoImpl();
@@ -65,7 +67,7 @@ public class ShowReimServlet extends HttpServlet {
 
 			
 			if(reimList.size() == 0) {
-				System.out.println("Null Reimbursement List");
+				System.out.println("Logged In Emp Has No Reimbursements");
 				response.setContentType("html/text");
 				response.getWriter().write("No reimbursements.");
 				return;

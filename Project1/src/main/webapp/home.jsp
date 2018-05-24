@@ -37,6 +37,8 @@
 			Reimbursement</button>
 		
 			<button type="button" class="btn btn-secondary" id="employeeButton">Employees</button>
+			<button type="button" class="btn btn-secondary" id="logoutButton" onclick="logout();">Logout</button>
+		
 		<form class="box" action="LogoutServlet" method="post">
 		<input class="btn btn-primary btn-xl" type="submit" value="Logout" style="margin-left:10px">
             </form>
@@ -52,8 +54,8 @@
 
 	<div id="subReimDiv">
 
-		<form class="box" action="Request" method="post"
-			enctype="multipart/form-data">
+		<form class="box" action="SubmitReimServlet" method="post">
+		<!-- 	enctype="multipart/form-data">  -->
 			<fieldset>
 				<h2 class=" section-heading mb-4 ">
 					<span class="section-heading-upper ">Enter your
@@ -62,29 +64,20 @@
 				<div class="mb-3 ">
 					<div class="col-md-6 ">
 						<div class="form-group ">
-							<label for="amount">What is the reimbursement amount?</label> <input
-								type="number" step="0.01" name="amount " class="form-control ">
-							<label for="description ">Write a short description about
-								the request:</label> <input type="text" name="description "
-								class="form-control "> <label for="image">Insert
-								your receipt</label> <input type="file" name="image"
-								class="form-control "> <label for="type">Categorize
-								your reimbursement type:</label> <select name="type"
-								class="form-control ">
-								<option value="1">Transportation</option>
-								<option value="2">Entertainment</option>
-								<option value="3">Food</option>
-								<option value="4">Supplies</option>
-								<option value="5">Other</option>
-							</select>
+								<label for="reimAmount">Enter Reimbursement Amount: </label> 
+								<input type="number" step="0.01" name="val" class="form-control">
+								<label for="reimDesc">Write a short description about the request:</label> 
+								<input type="text" name="des" class="form-control"> 
+						   <!-- <label for="reimReceipt">Please submit a receipt: </label> 
+								<input type="file" name="rec" class="form-control">  --> 
 						</div>
 					</div>
 				</div>
 			</fieldset>
 			<br>
 			<div class="intro-button mx-auto ">
-				<input id="badbutton" class="btn btn-primary btn-xl " type="submit"
-					value="submit " style="float: left">
+				<input id="submitReimButton" class="btn btn-primary btn-xl " type="submit"
+					value="Submit" style="float: left">
 			</div>
 		</form>
 	</div>
@@ -247,7 +240,7 @@
             </div>
             <div id="collapseFour" class="collapse">
                 <div class="card-body">
-                    <form class="box" action="Resolve" method="post">
+                    <form class="box" action="ADReimbursement" method="post">
                         <fieldset>
                             <h2 class="section-heading mb-4">
                                 <span class="section-heading-upper">Resolve Reimbursement Requests</span>
@@ -255,12 +248,12 @@
                             <div class="mb-3">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="reid">Whats the reimbursement account ID</label>
-                                        <input type="number" name="reim_id" class="form-control">
-                                        <label for="type">Categorize your reimbursement type:</label>
-                                        <select name="type" class="form-control">
-                                            <option value="2">Approve</option>
-                                            <option value="3">Deny</option>
+                                        <label for="reimSelector">Enter Reimbursement ID</label>
+                                        <input type="number" name="reimbursementId" class="form-control">
+                                        <label for="selector">Approve/Deny:</label>
+                                        <select name="approveDeny" class="form-control">
+                                            <option value="1">Approve</option>
+                                            <option value="2">Deny</option>
                                         </select>
                                     </div>
                                 </div>
@@ -330,6 +323,32 @@
         </div>
 
     </div>
+    
+    <div id="accordion3">
+
+        <div class="card">
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion3" href="#collapseSeven">
+                    Display My Reimbursements
+                </a>
+            </div>
+            <div id="collapseSeven" class="collapse">
+                <div class="card-body">
+                    <table id="myReimList" class="table">
+                        <tr>
+                            <th>ID</th>
+                            <th>Description</th>
+                            <th>Receipt</th>
+                            <th>Status</th>
+                            <th>Manager ID</th>
+                            <th>Employee ID</th>
+                            <th>Amount</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </div>
 	
 	
 		<ul id="reimUl">

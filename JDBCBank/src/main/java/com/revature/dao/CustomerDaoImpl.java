@@ -234,31 +234,5 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public boolean insertCustomer(String username, String password) {
 		
-try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
-	
-	
-			BankAccountDao ba = new BankAccountDaoImpl();
-			CustomerDao ca = new CustomerDaoImpl();
-			String sql = "INSERT INTO CUSTOMER (CUSTOMER_PASSWORD, CUSTOMER_ADMIN, USERNAME) VALUES (?,?,?)";
-			
-			PreparedStatement statement = con.prepareStatement(sql);
-			
-			statement.setString(1, password);
-			statement.setBoolean(2, false);
-			statement.setString(3, username);
-			statement.executeQuery();
-			con.close();
-			
-			ba.insertBankAccount("Checking", ca.getCustomerId(username, password));
-			ba.insertBankAccount("Savings", ca.getCustomerId(username, password));
-
-			return true;
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
+up
 }

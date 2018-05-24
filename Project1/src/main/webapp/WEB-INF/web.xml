@@ -88,6 +88,18 @@
   	<description></description>
   	<servlet-class>com.revature.servlets.GetEmployeesServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>ADReimbursement</servlet-name>
+  	<display-name>ADReimbursement</display-name>
+  	<description></description>
+  	<servlet-class>com.revature.servlets.ADReimbursement</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>SubmitReimServlet</servlet-name>
+  	<display-name>SubmitReimServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.revature.servlets.SubmitReimServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>MasterServlet</servlet-name>
   	<url-pattern>/MasterServlet</url-pattern>
@@ -143,5 +155,13 @@
   <servlet-mapping>
   	<servlet-name>GetEmployeesServlet</servlet-name>
   	<url-pattern>/GetEmployeesServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ADReimbursement</servlet-name>
+  	<url-pattern>/ADReimbursement</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SubmitReimServlet</servlet-name>
+  	<url-pattern>/SubmitReimServlet</url-pattern>
   </servlet-mapping>
 </web-app>
