@@ -121,7 +121,7 @@ function getApprovedReim(xhr) {
 		document.getElementById("approvedList").appendChild(newrow);
 		var col1 = document.createElement("td");
 		var col2 = document.createElement("td");
-		var col3 = document.createElement("td");
+		var col3 = document.createElement("a");
 		var col4 = document.createElement("td");
 		var col5 = document.createElement("td");
 		var col6 = document.createElement("td");
@@ -132,7 +132,8 @@ function getApprovedReim(xhr) {
 		if (splitReim[2] == "null") {
 			col3.textContent = "None";
 		} else {
-			col3.textContent = "Submitted";
+			col3.innerHTML = "Submitted";
+			col3.href = splitReim[2];
 		}
 		col4.textContent = splitReim[3];
 		col5.textContent = splitReim[4];
@@ -165,7 +166,7 @@ function getDeniedReim(xhr) {
 		document.getElementById("deniedList").appendChild(newrow);
 		var col1 = document.createElement("td");
 		var col2 = document.createElement("td");
-		var col3 = document.createElement("td");
+		var col3 = document.createElement("a");
 		var col4 = document.createElement("td");
 		var col5 = document.createElement("td");
 		var col6 = document.createElement("td");
@@ -176,7 +177,8 @@ function getDeniedReim(xhr) {
 		if (splitReim[2] == "null") {
 			col3.textContent = "None";
 		} else {
-			col3.textContent = "Submitted";
+			col3.innerHTML = "Submitted";
+			col3.href = splitReim[2];
 		}
 		col4.textContent = splitReim[3];
 		col5.textContent = splitReim[4];
