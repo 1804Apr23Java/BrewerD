@@ -3,15 +3,13 @@
  */
 
 window.onload = function() {
+	
 	clearBox();
 	document.getElementById("homeDiv").style.display = "block";
 	document.getElementById("accordion2").style.display = "none";
 	sendAjaxGet("http://localhost:8083/Project1/ShowProfileServlet", getEmpProfile);
 	sendAjaxGet("http://localhost:8083/Project1/ShowReimServlet", myReimsList);
-	sendAjaxGet("http://localhost:8083/Project1/PReimServlet", getPendingReim);
-	sendAjaxGet("http://localhost:8083/Project1/AReimServlet", getApprovedReim);
-	sendAjaxGet("http://localhost:8083/Project1/DReimServlet", getDeniedReim);
-	sendAjaxGet("http://localhost:8083/Project1/GetEmployeesServlet", getEmployees);
+	
 }
 
 $(document).on("click", "#profileButton", function() {

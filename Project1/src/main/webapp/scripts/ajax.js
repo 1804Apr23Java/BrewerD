@@ -46,6 +46,10 @@ function getEmpProfile(xhr) {
 
 	var man = document.getElementById("ism").value;
 	if (man == 1) {
+		sendAjaxGet("http://localhost:8083/Project1/PReimServlet", getPendingReim);
+		sendAjaxGet("http://localhost:8083/Project1/AReimServlet", getApprovedReim);
+		sendAjaxGet("http://localhost:8083/Project1/DReimServlet", getDeniedReim);
+		sendAjaxGet("http://localhost:8083/Project1/GetEmployeesServlet", getEmployees);
 		document.getElementById("accordion2").style.display = "block";
 	} else {
 		document.getElementById("accordion2").style.display = "none";
@@ -66,13 +70,13 @@ function getPendingReim(xhr) {
 
 	var Reims = xhr.responseText.split("Reimbursement");
 	for (var i = 1; i < Reims.length; i++) {
-		var splitReim = Reims[i].split(":");
+		var splitReim = Reims[i].split("|");
 		var newrow = document.createElement("tr");
 		newrow.setAttribute("id", "Pending " + i);
 		document.getElementById("pendingList").appendChild(newrow);
 		var col1 = document.createElement("td");
 		var col2 = document.createElement("td");
-		var col3 = document.createElement("td");
+		var col3 = document.createElement("a");
 		var col4 = document.createElement("td");
 		var col5 = document.createElement("td");
 		var col6 = document.createElement("td");
@@ -83,7 +87,8 @@ function getPendingReim(xhr) {
 		if (splitReim[2] == "null") {
 			col3.textContent = "None";
 		} else {
-			col3.textContent = "Submitted";
+			col3.innerHTML = splitReim[2];
+			col3.href = splitReim[2];
 		}
 		col4.textContent = splitReim[3];
 		col5.textContent = splitReim[4];
@@ -110,7 +115,7 @@ function getApprovedReim(xhr) {
 
 	var Reims = xhr.responseText.split("Reimbursement");
 	for (var i = 1; i < Reims.length; i++) {
-		var splitReim = Reims[i].split(":");
+		var splitReim = Reims[i].split("|");
 		var newrow = document.createElement("tr");
 		newrow.setAttribute("id", "Approved " + i);
 		document.getElementById("approvedList").appendChild(newrow);
@@ -154,7 +159,7 @@ function getDeniedReim(xhr) {
 
 	var Reims = xhr.responseText.split("Reimbursement");
 	for (var i = 1; i < Reims.length; i++) {
-		var splitReim = Reims[i].split(":");
+		var splitReim = Reims[i].split("|");
 		var newrow = document.createElement("tr");
 		newrow.setAttribute("id", "Denied " + i);
 		document.getElementById("deniedList").appendChild(newrow);
@@ -195,13 +200,20 @@ function getDeniedReim(xhr) {
 }
 
 function myReimsList(xhr) {
-	console.log("Grabbing My Reims...")
+	
+	console.log("Grabbing My Reims For Logged In Emp...");
 
 	var Reims = xhr.responseText.split("Reimbursement");
+	
+	console.log("Reims.length: " + Reims.length);
+	
 	for (var i = 1; i < Reims.length; i++) {
-		var splitReim = Reims[i].split(":");
+		var splitReim = Reims[i].split("|");
+		
+		console.log("Split" + splitReim);
+		
 		var newrow = document.createElement("tr");
-		newrow.setAttribute("id", "Pending " + i);
+		newrow.setAttribute("id", "myReims " + i);
 		document.getElementById("myReimList").appendChild(newrow);
 		var col1 = document.createElement("td");
 		var col2 = document.createElement("td");
@@ -223,18 +235,18 @@ function myReimsList(xhr) {
 		col6.textContent = splitReim[5];
 		col7.textContent = splitReim[6];
 
-		document.getElementById("Pending " + i).appendChild(col1);
-		document.getElementById("Pending " + i).appendChild(col2);
+		document.getElementById("myReims " + i).appendChild(col1);
+		document.getElementById("myReims " + i).appendChild(col2);
 
 		if (splitReim[2] == "null") {
-			document.getElementById("Pending " + i).appendChild(col3);
+			document.getElementById("myReims " + i).appendChild(col3);
 		} else {
-			document.getElementById("Pending " + i).appendChild(col3);
+			document.getElementById("myReims " + i).appendChild(col3);
 		}
-		document.getElementById("Pending " + i).appendChild(col4);
-		document.getElementById("Pending " + i).appendChild(col5);
-		document.getElementById("Pending " + i).appendChild(col6);
-		document.getElementById("Pending " + i).appendChild(col7);
+		document.getElementById("myReims " + i).appendChild(col4);
+		document.getElementById("myReims " + i).appendChild(col5);
+		document.getElementById("myReims " + i).appendChild(col6);
+		document.getElementById("myReims " + i).appendChild(col7);
 	}
 }
 

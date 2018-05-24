@@ -37,10 +37,9 @@
 			Reimbursement</button>
 		
 			<button type="button" class="btn btn-secondary" id="employeeButton">Employees</button>
-			<button type="button" class="btn btn-secondary" id="logoutButton" onclick="logout();">Logout</button>
 		
 		<form class="box" action="LogoutServlet" method="post">
-		<input class="btn btn-primary btn-xl" type="submit" value="Logout" style="margin-left:10px">
+		<input class="btn btn-primary btn-xl" type="submit" value="Logout" style="margin-left:0px">
             </form>
 	</div>
 
@@ -68,8 +67,8 @@
 								<input type="number" step="0.01" name="val" class="form-control">
 								<label for="reimDesc">Write a short description about the request:</label> 
 								<input type="text" name="des" class="form-control"> 
-						   <!-- <label for="reimReceipt">Please submit a receipt: </label> 
-								<input type="file" name="rec" class="form-control">  --> 
+						        <label for="reimReceipt">Please provide hyperlink to a receipt: </label> 
+								<input type="text" name="rec" class="form-control">
 						</div>
 					</div>
 				</div>
@@ -306,7 +305,7 @@
                             <div class="mb-3">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="username1">Enter Employee ID</label>
+                                        <label for="employee_Id">Enter Employee ID</label>
                                         <input id="empReimsId" type="number" name="emp_id" class="form-control" onkeyup="getEmpReims()">
                                     </div>
                                 </div>

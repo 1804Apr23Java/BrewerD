@@ -1,7 +1,6 @@
 package com.revature.Dao;
 
 import java.io.IOException;
-import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,7 +11,7 @@ public interface ReimbursementDao {
 	
 	public List<Reimbursement> getAllReimbursements() throws IOException, SQLException;
 	public Reimbursement getReimbursement(int reim_id) throws IOException, SQLException;
-	public boolean insertReimbursement(String req, Blob b, int emp_id, double amt) throws IOException, SQLException;
+	public boolean insertReimbursement(String req, String img, int emp_id, double amt) throws IOException, SQLException;
 	public boolean denyReimbursement(Reimbursement r, int man_id) throws IOException, SQLException;
 	public List<Reimbursement> getReimForEmp(Employee e) throws IOException, SQLException;
 	public int getReimbursementId(Reimbursement r) throws IOException, SQLException;

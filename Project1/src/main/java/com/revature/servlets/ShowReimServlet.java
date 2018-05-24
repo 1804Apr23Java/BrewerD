@@ -48,22 +48,19 @@ public class ShowReimServlet extends HttpServlet {
 		ReimbursementDao rd = new ReimbursementDaoImpl();
 		Employee emp;
 		List<Reimbursement> reimList;
-		
-		//Gson objGson = new GsonBuilder().setPrettyPrinting().create();
-		//Gson objGson = new GsonBuilder().create();
-		
-		//ObjectMapper m = new ObjectMapper();
+
 		try {
 			
 			emp = ed.getEmployee((String) session.getAttribute("username"));
 			
 			reimList = rd.getReimForEmp(emp);
-			
-			//String json = objGson.toJson(reimList);
-			
+
 			String strList = "";
 			
-			//Iterator<Reimbursement> iterator = reimList.iterator();
+			System.out.println("ShowReimServlet Output: ");
+			for(Reimbursement r : reimList) {
+				System.out.println(r.toString());
+			}
 
 			
 			if(reimList.size() == 0) {

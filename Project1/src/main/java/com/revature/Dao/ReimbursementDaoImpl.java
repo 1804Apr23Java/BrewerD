@@ -1,7 +1,6 @@
 package com.revature.Dao;
 
 import java.io.IOException;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,7 +28,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
 			int reim_id;
 			String req;
-			Blob b;
+			String img;
 			String status;
 			int man_id;
 			int emp_id;
@@ -45,13 +44,13 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
 				reim_id = resultSet.getInt("REIM_ID");
 				req = resultSet.getString("REIM_REQ");
-				b = resultSet.getBlob("REIM_BLOB");
+				img = resultSet.getString("REIM_String");
 				status = resultSet.getString("REIM_STATUS");
 				man_id = resultSet.getInt("REIM_MAN");
 				emp_id = resultSet.getInt("REIM_EMP");
 				amt = resultSet.getDouble("REIM_AMT");
 
-				r = new Reimbursement(reim_id, req, b, status, man_id, emp_id, amt);
+				r = new Reimbursement(reim_id, req, img, status, man_id, emp_id, amt);
 
 				rl.add(r);
 			}
@@ -79,7 +78,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
 			int reim_id;
 			String req;
-			Blob b;
+			String img;
 			String status;
 			int man_id;
 			int emp_id;
@@ -95,13 +94,13 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
 				reim_id = resultSet.getInt("REIM_ID");
 				req = resultSet.getString("REIM_REQ");
-				b = resultSet.getBlob("REIM_BLOB");
+				img = resultSet.getString("REIM_IMG");
 				status = resultSet.getString("REIM_STATUS");
 				man_id = resultSet.getInt("REIM_MAN");
 				emp_id = resultSet.getInt("REIM_EMP");
 				amt = resultSet.getDouble("REIM_AMT");
 
-				r = new Reimbursement(reim_id, req, b, status, man_id, emp_id, amt);
+				r = new Reimbursement(reim_id, req, img, status, man_id, emp_id, amt);
 
 				return r;
 			}
@@ -118,17 +117,18 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 	}
 
 	@Override
-	public boolean insertReimbursement(String req, Blob b, int emp_id, double amt) {
+	public boolean insertReimbursement(String req, String img, int emp_id, double amt) {
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 
-			String sql = "INSERT INTO REIM (REIM_REQ, REIM_EMP, REIM_AMT) VALUES (?,?,?)";
+			String sql = "INSERT INTO REIM (REIM_REQ, REIM_EMP, REIM_AMT, REIM_IMG) VALUES (?,?,?,?)";
 
 			PreparedStatement statement = con.prepareStatement(sql);
 
 			statement.setString(1, req);
 			statement.setInt(2, emp_id);
 			statement.setDouble(3, amt);
+			statement.setString(4, img);
 			statement.executeQuery();
 			con.close();
 
@@ -200,7 +200,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
 			int reim_id;
 			String req;
-			Blob b;
+			String b;
 			String status;
 			int man_id;
 			int emp_id;
@@ -216,7 +216,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
 				reim_id = resultSet.getInt("REIM_ID");
 				req = resultSet.getString("REIM_REQ");
-				b = resultSet.getBlob("REIM_BLOB");
+				b = resultSet.getString("REIM_IMG");
 				status = resultSet.getString("REIM_STATUS");
 				man_id = resultSet.getInt("REIM_MAN");
 				emp_id = resultSet.getInt("REIM_EMP");
@@ -263,7 +263,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
 			int reim_id;
 			String req;
-			Blob b;
+			String img;
 			String status;
 			int man_id;
 			int emp_id;
@@ -279,13 +279,13 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
 				reim_id = resultSet.getInt("REIM_ID");
 				req = resultSet.getString("REIM_REQ");
-				b = resultSet.getBlob("REIM_BLOB");
+				img = resultSet.getString("REIM_IMG");
 				status = resultSet.getString("REIM_STATUS");
 				man_id = resultSet.getInt("REIM_MAN");
 				emp_id = resultSet.getInt("REIM_EMP");
 				amt = resultSet.getDouble("REIM_AMT");
 
-				r = new Reimbursement(reim_id, req, b, status, man_id, emp_id, amt);
+				r = new Reimbursement(reim_id, req, img, status, man_id, emp_id, amt);
 
 				rl.add(r);
 			}
@@ -313,7 +313,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
 			int reim_id;
 			String req;
-			Blob b;
+			String b;
 			String status;
 			int man_id;
 			int emp_id;
@@ -329,7 +329,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
 				reim_id = resultSet.getInt("REIM_ID");
 				req = resultSet.getString("REIM_REQ");
-				b = resultSet.getBlob("REIM_BLOB");
+				b = resultSet.getString("REIM_IMG");
 				status = resultSet.getString("REIM_STATUS");
 				man_id = resultSet.getInt("REIM_MAN");
 				emp_id = resultSet.getInt("REIM_EMP");
@@ -363,7 +363,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
 			int reim_id;
 			String req;
-			Blob b;
+			String b;
 			String status;
 			int man_id;
 			int emp_id;
@@ -379,7 +379,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
 				reim_id = resultSet.getInt("REIM_ID");
 				req = resultSet.getString("REIM_REQ");
-				b = resultSet.getBlob("REIM_BLOB");
+				b = resultSet.getString("REIM_IMG");
 				status = resultSet.getString("REIM_STATUS");
 				man_id = resultSet.getInt("REIM_MAN");
 				emp_id = resultSet.getInt("REIM_EMP");

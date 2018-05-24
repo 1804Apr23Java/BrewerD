@@ -1,7 +1,5 @@
 package com.revature.base;
 
-import java.sql.Blob;
-
 public class Reimbursement {
 	
 	public int getReim_id() {
@@ -12,8 +10,8 @@ public class Reimbursement {
 	}
 	@Override
 	public String toString() {
-		return "Reimbursement " + reim_id + ":" + req + ":" + blob + ":" + status
-				+ ":" + man_id + ":" + emp_id + ":$" + amt;
+		return "Reimbursement " + reim_id + "|" + req + "|" + img + "|" + status
+				+ "|" + man_id + "|" + emp_id + "|$" + amt;
 	}
 	public String getReq() {
 		return req;
@@ -21,11 +19,11 @@ public class Reimbursement {
 	public void setReq(String req) {
 		this.req = req;
 	}
-	public Blob getBlob() {
-		return blob;
+	public String getImg() {
+		return img;
 	}
-	public void setBlob(Blob blob) {
-		this.blob = blob;
+	public void setImg(String img) {
+		this.img = img;
 	}
 	public String getStatus() {
 		return status;
@@ -52,28 +50,28 @@ public class Reimbursement {
 		this.amt = amt;
 	}
 	
-	public Reimbursement(int reim_id, String req, Blob blob, String status, int man_id, int emp_id, double amt) {
+	public Reimbursement(int reim_id, String req, String b, String status, int man_id, int emp_id, double amt) {
 		super();
 		this.reim_id = reim_id;
 		this.req = req;
-		this.blob = blob;
+		this.img = b;
 		this.status = status;
 		this.man_id = man_id;
 		this.emp_id = emp_id;
 		this.amt = amt;
 	}
 	
-//	public Reimbursement(String req, Blob b, String string3) {
+//	public Reimbursement(String req, String b, String string3) {
 //		super();
 //		this.req = req;
-//		this.blob = b;
+//		this.String = b;
 //		
 //	}
 
-	public Reimbursement(String req, Blob b, int emp_id, double amt) {
+	public Reimbursement(String req, String b, int emp_id, double amt) {
 		super();
 		this.req = req;
-		this.blob = b;
+		this.img = b;
 		this.emp_id = emp_id;
 		this.amt = amt;
 	}
@@ -87,7 +85,7 @@ public class Reimbursement {
 
 	int reim_id;
 	String req;
-	Blob blob = null;
+	String img;
 	String status;
 	int man_id;
 	int emp_id;
