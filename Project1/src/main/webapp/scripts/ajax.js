@@ -259,9 +259,11 @@ function getEmpReims() {
 */
 
 function getReimsForEmp() {
+	
 	console.log("GETREIMSFOREMP");
 	sendAjaxGet("http://localhost:8083/Project1/ReimsForEmpServlet", getEmpReims);
 }
+
 function getEmpReims(xhr) {
 	var eachReq = xhr.responseText.split("Reimbursement");
 	var user = document.getElementById("empReimsId").value;

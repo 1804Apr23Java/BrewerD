@@ -1,0 +1,21 @@
+server:
+  port: 8083
+  
+endpoints:
+  beans:
+    sensitive: false
+  mappings:
+    sensitive: false
+
+spring:
+  application:
+    name: CodeChallengeApp
+  datasource:
+    platform: oracle
+    url: jdbc:oracle:thin:@revaturedb.cdwxgjcqrtpe.us-east-2.rds.amazonaws.com:1521:ORCL
+    username: cc
+    password: cc
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    database: ORACLE
+    show-sql: true
